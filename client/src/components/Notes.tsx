@@ -15,6 +15,7 @@ export interface NotesProps {
 }
 
 const Notes = ({ notes }: NotesProps) => {
+  console.log("notes", notes);
   return (
     <>
       <div className="grid-note">

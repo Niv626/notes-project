@@ -17,20 +17,17 @@ export interface NoteProps {
 
 const NoteContainer = ({ note }: NoteProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(note.isFavorite);
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn: removeNoteById,
     onSuccess: () => queryClient.invalidateQueries("notes"),
   });
-  console.log("note", note);
 
   const favoriteNoteMutation = useMutation({
     mutationFn: setFavoriteNote,
     onSuccess: () => {
       queryClient.invalidateQueries("notes");
-      setIsFavorite((prev) => !prev);
     },
   });
 
@@ -66,7 +63,7 @@ const NoteContainer = ({ note }: NoteProps) => {
               onClick={() => favoriteNoteMutation.mutate(note)}
               style={{ paddingLeft: 10, cursor: "pointer" }}
             >
-              {isFavorite ? <StarFilled /> : <StarOutlined />}
+              {note.isFavorite ? <StarFilled /> : <StarOutlined />}
             </span>
           </div>
           <div style={{ float: "right", paddingRight: 10 }}>

@@ -1,5 +1,5 @@
 import { Col, Input, Row } from "antd";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import AddNote from "./AddNote";
 import Notes, { Note } from "./Notes";
 import asd from "../assets/avatar-user-svgrepo-com.svg"; //need to fix this
@@ -7,6 +7,8 @@ import { getNotes } from "../api/noteApi";
 import { getUser } from "../api/userApi";
 
 import { useQuery } from "react-query";
+import { CollapsedContext, CollapsedData } from "../context/CollapesdContext";
+import { AuthContext, AuthData } from "../context/AuthContext";
 
 const { Search } = Input;
 
@@ -17,21 +19,24 @@ type ContentPageProps = {
 const ContentPage = ({ favorite }: ContentPageProps) => {
   const { data: notes } = useQuery("notes", getNotes);
   const [search, setSearch] = useState("");
+  const { collapsed }: AuthData = useContext(AuthContext);
   console.log("favorite", favorite);
 
   const onSearch = (e: React.FormEvent<HTMLInputElement>) =>
     setSearch(e.currentTarget.value);
 
   const { data: user } = useQuery("user", getUser);
-
+  console.log("firstcollapsed", collapsed);
   return (
-    <Col span={false ? 23 : 21} style={{ height: "100vh", width: "100vh" }}>
+    <Col
+      span={collapsed ? 23 : 21}
+      style={{ height: "100vh", width: "100vh", position: "static" }}
+    >
       <Row
         className="menu-left-bar"
         style={{
           padding: 25,
-          backgroundColor: "",
-          position: "sticky",
+          backgroundColor: "#5350508c",
           top: 0,
           zIndex: 1,
         }}

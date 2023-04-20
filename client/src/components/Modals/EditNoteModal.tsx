@@ -53,6 +53,7 @@ const EditNoteModal = ({
       text: noteText,
       id: noteId,
       isFavorite: false,
+      type: "note",
     };
     mutation.mutate(note);
     setNoteText("");
@@ -76,6 +77,7 @@ const EditNoteModal = ({
         maxLength={20}
         onChange={handleTitleChange}
         value={noteTitle}
+        defaultValue={note.text}
         placeholder="title.."
         required
       />
@@ -86,6 +88,7 @@ const EditNoteModal = ({
         maxLength={500}
         onChange={handleTextChange}
         value={noteText}
+        defaultValue={note.text}
         placeholder="add text.."
       />
       <br />

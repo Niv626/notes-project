@@ -8,6 +8,7 @@ import {
 import App from "./App";
 import Login from "./pages/Login";
 import AuthProvider from "./context/AuthContext";
+import CollapsedProvider from "./context/CollapesdContext";
 
 const router = createBrowserRouter([
   {
@@ -24,7 +25,9 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthProvider>
+        {/* <CollapsedProvider> */}
         <App />
+        {/* </CollapsedProvider> */}
       </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>

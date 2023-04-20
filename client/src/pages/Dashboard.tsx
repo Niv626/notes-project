@@ -14,10 +14,6 @@
 
 // // const { Search } = Input;
 
-// // export interface NotesProps {
-// //   notes: Note[];
-// // }
-
 // // const Dashboard = () => {
 // //   const { setAuth }: AuthData = useContext(AuthContext);
 // //   const { data: notes, refetch } = useQuery("notes", getNotes);

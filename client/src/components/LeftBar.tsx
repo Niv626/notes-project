@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import {
   ContainerOutlined,
   DesktopOutlined,
+  LogoutOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   PieChartOutlined,
@@ -14,6 +15,7 @@ import { useQuery } from "react-query";
 import { getNotes } from "../api/noteApi";
 import { AuthContext, AuthData } from "../context/AuthContext";
 import "./leftbar.css";
+import { CollapsedContext, CollapsedData } from "../context/CollapesdContext";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -36,10 +38,11 @@ function getItem(
 const LeftBar = () => {
   // fix props type
 
-  const { setAuth }: AuthData = useContext(AuthContext);
+  const { setAuth, collapsed, setCollapsed }: AuthData =
+    useContext(AuthContext);
   const { data: notes, refetch } = useQuery("notes", getNotes);
   const navigate = useNavigate();
-  const [collapsed, setCollapsed] = useState(false);
+  // const [collapsed, setCollapsed] = useState(false);
 
   const logout = () => {
     setAuth && setAuth({ accessToken: "" });
@@ -71,7 +74,8 @@ const LeftBar = () => {
     ),
   ];
   const toggleCollapsed = () => {
-    setCollapsed(!collapsed);
+    setCollapsed((prev) => !prev);
+    localStorage.setItem("collapsed", JSON.stringify(!collapsed));
   };
 
   return (
@@ -94,14 +98,20 @@ const LeftBar = () => {
             style={{ paddingTop: 50 }}
             inlineCollapsed={collapsed}
             items={items}
-            onClick={() => refetch}
+            onClick={() => refetch()}
           />
           <div style={{ position: "absolute", bottom: 0, paddingBottom: 10 }}>
             {collapsed ? (
               // <MenuUnfoldOutlined />
-              <>asasas</>
+              <LogoutOutlined
+                onClick={logout}
+                style={{ color: "white", fontSize: 25 }}
+              />
             ) : (
-              <Button onClick={logout}>Logout</Button>
+              <Button onClick={logout}>
+                <LogoutOutlined style={{ color: "black", fontSize: 16 }} />
+                <b> Logout</b>
+              </Button>
             )}
           </div>
         </div>
