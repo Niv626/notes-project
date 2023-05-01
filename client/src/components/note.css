@@ -8,7 +8,7 @@
   height: 252px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   margin: 15px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
     rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
@@ -44,6 +44,7 @@ h1 {
   text-overflow: ellipsis;
   white-space: nowrap;
   margin: 4px;
+  padding-bottom: 15px;
 }
 
 .body-truncate {
@@ -54,4 +55,5 @@ h1 {
   -webkit-line-clamp: 7; /* number of lines to show */
   line-clamp: 7;
   -webkit-box-orient: vertical;
+  margin-bottom: 128px;
 }

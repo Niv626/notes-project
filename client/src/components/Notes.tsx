@@ -3,7 +3,7 @@ import NoteContainer from "./NoteContainer";
 import "./note.css";
 
 export interface Note {
-  text: string;
+  text: any;
   title: string;
   isFavorite: boolean;
   type: string;
@@ -15,7 +15,6 @@ export interface NotesProps {
 }
 
 const Notes = ({ notes }: NotesProps) => {
-  console.log("notes", notes);
   return (
     <>
       <div className="grid-note">

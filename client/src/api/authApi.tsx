@@ -26,12 +26,12 @@ app.interceptors.request.use(
     const token = localStorage.getItem("access_token");
     if (!token) return config;
     const { exp }: JwtPayload = ({} = jwtDecode(token));
-    console.log(
-      "token && exp && Date.now() < exp * 1000",
-      token && exp && Date.now() < exp * 1000
-    );
-    console.log("token ", token);
-    console.log("Date.now()", Date.now());
+    // console.log(
+    //   "token && exp && Date.now() < exp * 1000",
+    //   token && exp && Date.now() < exp * 1000
+    // );
+    // console.log("token ", token);
+    // console.log("Date.now()", Date.now());
 
     if (token && exp && Date.now() < exp * 1000) {
       config.headers = {

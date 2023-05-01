@@ -15,7 +15,6 @@ import { useQuery } from "react-query";
 import { getNotes } from "../api/noteApi";
 import { AuthContext, AuthData } from "../context/AuthContext";
 import "./leftbar.css";
-import { CollapsedContext, CollapsedData } from "../context/CollapesdContext";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -42,7 +41,6 @@ const LeftBar = () => {
     useContext(AuthContext);
   const { data: notes, refetch } = useQuery("notes", getNotes);
   const navigate = useNavigate();
-  // const [collapsed, setCollapsed] = useState(false);
 
   const logout = () => {
     setAuth && setAuth({ accessToken: "" });
@@ -66,7 +64,7 @@ const LeftBar = () => {
       </Link>
     ),
     getItem(
-      "Archive",
+      "About",
       "3",
       <Link replace to={"/dashboard/about"}>
         <ContainerOutlined />
@@ -74,7 +72,9 @@ const LeftBar = () => {
     ),
   ];
   const toggleCollapsed = () => {
-    setCollapsed((prev) => !prev);
+    if (setCollapsed) {
+      setCollapsed((prev) => !prev);
+    }
     localStorage.setItem("collapsed", JSON.stringify(!collapsed));
   };
 

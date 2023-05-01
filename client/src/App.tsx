@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Outlet, Route, Routes, useNavigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Singup from "./pages/Singup";
@@ -8,6 +8,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import ContentPage from "./components/ContentPage";
 import LeftBar from "./components/LeftBar";
+import Background from "./assets/pexels-fwstudio-129731.jpg";
 
 const queryClient = new QueryClient();
 
@@ -20,10 +21,19 @@ const queryClient = new QueryClient();
 // }
 
 export const LayoutPage = () => {
+  const { collapsed }: AuthData = useContext(AuthContext);
+
   return (
     <>
       <LeftBar />
-      <Outlet />
+      <div
+        style={{
+          backgroundImage: `url(${Background})`,
+          width: collapsed ? "95.834%" : "87.5%",
+        }}
+      >
+        <Outlet />
+      </div>
     </>
   );
 };

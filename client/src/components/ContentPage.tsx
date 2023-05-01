@@ -16,21 +16,30 @@ type ContentPageProps = {
   favorite?: boolean;
 };
 
+function stripHtml(html) {
+  let tmp = document.createElement("DIV");
+  tmp.innerHTML = html;
+  return tmp.textContent || tmp.innerText || "";
+}
+
 const ContentPage = ({ favorite }: ContentPageProps) => {
   const { data: notes } = useQuery("notes", getNotes);
   const [search, setSearch] = useState("");
   const { collapsed }: AuthData = useContext(AuthContext);
-  console.log("favorite", favorite);
 
   const onSearch = (e: React.FormEvent<HTMLInputElement>) =>
     setSearch(e.currentTarget.value);
 
   const { data: user } = useQuery("user", getUser);
-  console.log("firstcollapsed", collapsed);
   return (
     <Col
       span={collapsed ? 23 : 21}
-      style={{ height: "100vh", width: "100vh", position: "static" }}
+      style={{
+        height: "100vh",
+        width: "100%",
+        position: "fixed",
+        overflowX: "hidden",
+      }}
     >
       <Row
         className="menu-left-bar"
@@ -54,6 +63,7 @@ const ContentPage = ({ favorite }: ContentPageProps) => {
             onChange={onSearch}
             style={{ width: "80%" }}
             size="large"
+            allowClear
           />
         </Col>
         <Col span={9}>
@@ -99,7 +109,8 @@ const ContentPage = ({ favorite }: ContentPageProps) => {
         <Notes
           notes={notes?.filter((note: Note) => {
             return (
-              (note.text.includes(search) || note.title.includes(search)) &&
+              (stripHtml(note?.text)?.includes(search) ||
+                note.title.includes(search)) &&
               (favorite ? note.isFavorite === true : true)
             );
           })}

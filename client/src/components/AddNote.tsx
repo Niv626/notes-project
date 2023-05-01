@@ -1,10 +1,11 @@
 import { Button } from "antd";
 import React, { useState } from "react";
-import AddNoteModal from "./Modals/AddNoteModal";
+import AddNoteModal from "./Modals/AddEditModal/AddNoteModal";
 import { PlusCircleOutlined } from "@ant-design/icons";
 
 const AddNote = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div>
       <Button

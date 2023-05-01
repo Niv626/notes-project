@@ -1,0 +1,8 @@
+.sun-editor {
+  background-color: transparent;
+  border: none;
+}
+
+.sun-editor .se-resizing-bar {
+  display: none;
+}
