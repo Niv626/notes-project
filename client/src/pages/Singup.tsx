@@ -36,7 +36,7 @@ const Singup = () => {
         .then((res) => {
           if (true) {
             setAuth({ accessToken: res.data["access_token"] });
-            navigate("../dashboard", { replace: true });
+            navigate("../login", { replace: true });
           } else {
             openNotification("topLeft", "");
           }
