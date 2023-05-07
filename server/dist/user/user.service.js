@@ -12,17 +12,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
+const argon = require("argon2");
 let UserService = class UserService {
     constructor(prisma) {
         this.prisma = prisma;
     }
     async editUser(userId, dto) {
+        const data = Object.assign(Object.assign(Object.assign({}, (dto.password && { hash: await argon.hash(dto.password) })), (dto.firstName && { firstName: dto.firstName })), (dto.lastName && { lastName: dto.lastName }));
         const user = await this.prisma.user.update({
             where: {
                 id: userId,
             },
-            data: Object.assign({}, dto)
+            data,
         });
+        return user;
     }
 };
 UserService = __decorate([

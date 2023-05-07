@@ -1,5 +1,4 @@
-import React, { useState, createContext, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, createContext } from "react";
 
 export const CollapsedContext = createContext({});
 
@@ -14,7 +13,6 @@ export interface CollapsedData {
 
 const CollapsedProvider = ({ children }: { children: React.ReactNode }) => {
   const localCollapsed = localStorage.getItem("collapsed");
-  console.log("localCollapsed", localCollapsed);
   const [collapsed, setCollapsed] =
     useState(JSON.parse(localCollapsed || "false")) || false;
 

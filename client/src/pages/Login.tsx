@@ -7,6 +7,7 @@ import api, { login } from "../api/authApi";
 import { useNavigate } from "react-router-dom";
 import { openNotification } from "../utils/openNotification";
 import { useMutation, useQueryClient } from "react-query";
+import { AxiosResponse } from "axios";
 
 interface LoginProps {
   setAuth: Dispatch<SetStateAction<boolean>>;
@@ -30,14 +31,23 @@ const Login = () => {
         localStorage.setItem("expiration", expiration.toISOString());
         navigate("../dashboard", { replace: true });
       } else {
-        openNotification("topLeft");
+        openNotification("topLeft", "Unknown error occurred");
       }
       queryClient.invalidateQueries("notes");
+    },
+    onError: ({ response }) => {
+      if (response.status === 403) {
+        openNotification("topLeft", "Username or password are incorrect");
+      }
+      if (response.status === 400) {
+        console.log("response", response);
+        openNotification("topLeft", response.data.message?.[0]);
+      }
     },
   });
 
   const onFinish = (values: { email: string; password: string }) => {
-    mutation.mutate(values);
+    mutation.mutate({ ...values, firstName: " ", lastName: " " });
   };
 
   return (
@@ -45,33 +55,46 @@ const Login = () => {
       <Card title="Login" className="signup-login-card">
         <Form
           name="basic"
-          labelCol={{ span: 8 }}
-          wrapperCol={{ span: 16 }}
-          initialValues={{ remember: true }}
+          // labelCol={{ span: 15 }}
+          // wrapperCol={{ span: 60 }}
+          initialValues={{ remember: false }}
           onFinish={onFinish}
           // onFinishFailed={onFinishFailed}
           autoComplete="off"
+          style={{ width: "100%" }}
         >
+          <b>Email</b>
           <Form.Item
-            label="Email"
+            // label="Email"
             name="email"
             rules={[{ required: true, message: "Please input your email!" }]}
           >
             <Input />
           </Form.Item>
+          <b>Password</b>
           <Form.Item
-            label="Password"
+            // label="Password"
             name="password"
             rules={[{ required: true, message: "Please input your password!" }]}
           >
             <Input.Password />
           </Form.Item>
-          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button type="primary" htmlType="submit">
-              Submit
+
+          <div style={{ marginBottom: 16 }}>
+            Need an account?{" "}
+            <Link to="/signup">
+              <b>Sign Up</b>
+            </Link>
+          </div>
+          <Form.Item style={{ display: "flex", justifyContent: "center" }}>
+            <Button
+              type="primary"
+              htmlType="submit"
+              style={{ width: 200, height: 40 }}
+            >
+              Sign In
             </Button>
           </Form.Item>
-          Need an account? <Link to="/signup">Sign Up</Link>
         </Form>
       </Card>
     </div>

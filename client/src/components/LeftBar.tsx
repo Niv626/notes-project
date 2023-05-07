@@ -1,22 +1,30 @@
 import React, { useContext, useState } from "react";
 import {
+  BookOutlined,
   ContainerOutlined,
   DesktopOutlined,
   LogoutOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   PieChartOutlined,
+  ProfileOutlined,
 } from "@ant-design/icons";
 import { Col, MenuProps } from "antd";
 import { Button, Menu } from "antd";
 import "./leftbar.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useMatch, useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
 import { getNotes } from "../api/noteApi";
 import { AuthContext, AuthData } from "../context/AuthContext";
 import "./leftbar.css";
 
 type MenuItem = Required<MenuProps>["items"][number];
+
+const routes = {
+  "/dashboard": "1",
+  "/dashboard/favorite": "2",
+  "/dashboard/about": "3",
+};
 
 function getItem(
   label: React.ReactNode,
@@ -34,43 +42,44 @@ function getItem(
   } as MenuItem;
 }
 
-const LeftBar = () => {
-  // fix props type
+const items: MenuItem[] = [
+  getItem(
+    "All Notes",
+    "1",
+    <Link replace to={"/dashboard"}>
+      <ProfileOutlined />
+    </Link>
+  ),
+  getItem(
+    "Favorites Notes",
+    "2",
+    <Link replace to={"/dashboard/favorite"}>
+      <BookOutlined />
+    </Link>
+  ),
+  getItem(
+    "Settings",
+    "3",
+    <Link replace to={"/dashboard/about"}>
+      <ContainerOutlined />
+    </Link>
+  ),
+];
 
+const LeftBar = () => {
   const { setAuth, collapsed, setCollapsed }: AuthData =
     useContext(AuthContext);
-  const { data: notes, refetch } = useQuery("notes", getNotes);
+  // const { data: notes, refetch } = useQuery("notes", getNotes);
   const navigate = useNavigate();
-
+  const isFavoriteRoute = useMatch("dashboard");
+  const location = useLocation();
+  console.log("location", routes[location.pathname]);
   const logout = () => {
     setAuth && setAuth({ accessToken: "" });
     localStorage.removeItem("access_token");
     navigate("../", { replace: true });
   };
 
-  const items: MenuItem[] = [
-    getItem(
-      "Home",
-      "1",
-      <Link replace to={"/dashboard"}>
-        <PieChartOutlined />
-      </Link>
-    ),
-    getItem(
-      "Favorite",
-      "2",
-      <Link replace to={"/dashboard/favorite"}>
-        <DesktopOutlined />
-      </Link>
-    ),
-    getItem(
-      "About",
-      "3",
-      <Link replace to={"/dashboard/about"}>
-        <ContainerOutlined />
-      </Link>
-    ),
-  ];
   const toggleCollapsed = () => {
     if (setCollapsed) {
       setCollapsed((prev) => !prev);
@@ -83,7 +92,7 @@ const LeftBar = () => {
       <Col span={collapsed ? 1 : 3} style={{ height: "100vh", width: "100vh" }}>
         <div className="left-bar">
           <Button
-            style={{ position: "absolute", left: 0 }}
+            style={{ position: "absolute" }}
             type="primary"
             onClick={toggleCollapsed}
           >
@@ -91,14 +100,13 @@ const LeftBar = () => {
             {/* TODO: Change icons */}
           </Button>
           <Menu
-            defaultSelectedKeys={["1"]}
+            defaultSelectedKeys={routes[location.pathname]}
             defaultOpenKeys={["sub1"]}
             mode="inline"
             theme="dark"
             style={{ paddingTop: 50 }}
             inlineCollapsed={collapsed}
             items={items}
-            onClick={() => refetch()}
           />
           <div style={{ position: "absolute", bottom: 0, paddingBottom: 10 }}>
             {collapsed ? (

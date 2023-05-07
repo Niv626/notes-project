@@ -19,7 +19,12 @@ export class AuthService {
     const hash = await argon.hash(dto.password);
     try {
       const user = await this.prisma.user.create({
-        data: { email: dto.email, hash },
+        data: {
+          email: dto.email,
+          hash,
+          firstName: dto.firstName,
+          lastName: dto.lastName,
+        },
       });
       return this.signToken(user.id, user.email);
     } catch (error) {
@@ -38,8 +43,6 @@ export class AuthService {
         email: dto.email,
       },
     });
-
-    console.log('dto, user', dto, user);
 
     if (!user) throw new ForbiddenException('Credential incorrect');
 

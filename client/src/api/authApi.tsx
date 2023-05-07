@@ -4,10 +4,10 @@ import useAuth from "../hooks/useAuth";
 
 const UNAUTHORIZED = 401;
 
-export const login = async ({ email, password }) => {
+export const login = async ({ email, password, firstName, lastName }) => {
   const res = await app.post(
     `/auth/signin`,
-    JSON.stringify({ email, password })
+    JSON.stringify({ email, password, firstName, lastName })
   );
   return res;
 };

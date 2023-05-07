@@ -27,6 +27,11 @@ __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
+], EditUserDto.prototype, "lastName", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", String)
 ], EditUserDto.prototype, "password", void 0);
 exports.EditUserDto = EditUserDto;
 //# sourceMappingURL=edit-user.dto.js.map

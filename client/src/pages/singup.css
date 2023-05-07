@@ -16,8 +16,9 @@
 
 .signup-login-card .ant-card-body {
   display: flex;
-  justify-content: start;
-  align-items: start;
+  /* justify-content: start;
+  align-items: start; */
+  margin-left: 15px;
 }
 
 .signup-input {

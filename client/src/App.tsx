@@ -9,6 +9,7 @@ import ProtectedRoutes from "./components/ProtectedRoutes";
 import ContentPage from "./components/ContentPage";
 import LeftBar from "./components/LeftBar";
 import Background from "./assets/pexels-fwstudio-129731.jpg";
+import Settings from "./pages/Settings";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ export const LayoutPage = () => {
         style={{
           backgroundImage: `url(${Background})`,
           width: collapsed ? "95.834%" : "87.5%",
+          position: "relative",
         }}
       >
         <Outlet />
@@ -62,7 +64,7 @@ function App() {
               path="favorite"
               element={<ContentPage favorite={true} />}
             ></Route>
-            <Route path="about" element={<>about</>}></Route>
+            <Route path="about" element={<Settings />}></Route>
           </Route>
         </Route>
         <Route path="/signup" element={<Singup />} />
