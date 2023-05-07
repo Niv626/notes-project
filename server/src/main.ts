@@ -7,7 +7,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
     credentials: true,
-    origin: 'https://note-me-server.onrender.com:3000',
+    origin: 'https://note-me.onrender.com',
   });
   // app.use(cookieParser());
   app.useGlobalPipes(
