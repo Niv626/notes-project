@@ -13,7 +13,7 @@ export const login = async ({ email, password, firstName, lastName }) => {
 };
 
 export const app = axios.create({
-  baseURL: "https://note-me-server.onrender.com:3333",
+  baseURL: "https://note-me-server.onrender.com",
   headers: {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
