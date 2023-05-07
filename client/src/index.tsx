@@ -4,7 +4,9 @@ import {
   BrowserRouter,
   createBrowserRouter,
   RouterProvider,
+  HashRouter,
 } from "react-router-dom";
+
 import App from "./App";
 import Login from "./pages/Login";
 import AuthProvider from "./context/AuthContext";
@@ -22,10 +24,10 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <HashRouter>
       <AuthProvider>
         <App />
       </AuthProvider>
-    </BrowserRouter>
+    </HashRouter>
   </React.StrictMode>
 );
