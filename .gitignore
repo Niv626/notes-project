@@ -8,8 +8,8 @@ jspm_packages/
 server/node_modules/
 client/node_modules/
 
-.env
-.env.test
+server/.env
+server/.env.test
 
 
 # Snowpack dependency directory (https://snowpack.dev/)
