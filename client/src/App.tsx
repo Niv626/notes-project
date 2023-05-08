@@ -60,10 +60,7 @@ function App() {
         <Route element={<ProtectedRoutes />}>
           <Route path="/dashboard" element={<LayoutPage />}>
             <Route index element={<ContentPage />}></Route>
-            <Route
-              path="favorite"
-              element={<ContentPage favorite={true} />}
-            ></Route>
+            <Route path="favorite" element={<ContentPage />}></Route>
             <Route path="about" element={<Settings />}></Route>
           </Route>
         </Route>
