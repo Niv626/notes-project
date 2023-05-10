@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useContext } from "react";
-import { Card, Form, Input, Button } from "antd";
+import { Card, Form, Input, Button, Col } from "antd";
 import "./singup.css";
 import { Link, Navigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
@@ -7,11 +7,7 @@ import api, { login } from "../api/authApi";
 import { useNavigate } from "react-router-dom";
 import { openNotification } from "../utils/openNotification";
 import { useMutation, useQueryClient } from "react-query";
-import { AxiosResponse } from "axios";
-
-interface LoginProps {
-  setAuth: Dispatch<SetStateAction<boolean>>;
-}
+import LoginImage from "../assets/pexels-lukas-317356.jpg";
 
 const Login = () => {
   const { setAuth, auth }: any = useContext(AuthContext);
@@ -52,50 +48,61 @@ const Login = () => {
 
   return (
     <div className="site-card-border-less-wrapper">
-      <Card title="Login" className="signup-login-card">
-        <Form
-          name="basic"
-          // labelCol={{ span: 15 }}
-          // wrapperCol={{ span: 60 }}
-          initialValues={{ remember: false }}
-          onFinish={onFinish}
-          // onFinishFailed={onFinishFailed}
-          autoComplete="off"
-          style={{ width: "100%" }}
-        >
-          <b>Email</b>
-          <Form.Item
-            // label="Email"
-            name="email"
-            rules={[{ required: true, message: "Please input your email!" }]}
+      <Card
+        // bordered={false}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-around",
+        }}
+        bodyStyle={{ padding: 0 }}
+        className="signup-login-card"
+      >
+        <Col span={12}>
+          <Form
+            name="basic"
+            initialValues={{ remember: false }}
+            onFinish={onFinish}
+            autoComplete="off"
+            style={{ width: "100%" }}
           >
-            <Input />
-          </Form.Item>
-          <b>Password</b>
-          <Form.Item
-            // label="Password"
-            name="password"
-            rules={[{ required: true, message: "Please input your password!" }]}
-          >
-            <Input.Password />
-          </Form.Item>
-
-          <div style={{ marginBottom: 16 }}>
-            Need an account?{" "}
-            <Link to="/signup">
-              <b>Sign Up</b>
-            </Link>
-          </div>
-          <Form.Item style={{ display: "flex", justifyContent: "center" }}>
-            <Button
-              type="primary"
-              htmlType="submit"
-              style={{ width: 200, height: 40 }}
+            <b>Email</b>
+            <Form.Item
+              name="email"
+              rules={[{ required: true, message: "Please input your email!" }]}
             >
-              Sign In
-            </Button>
-          </Form.Item>
-        </Form>
+              <Input />
+            </Form.Item>
+            <b>Password</b>
+            <Form.Item
+              name="password"
+              rules={[
+                { required: true, message: "Please input your password!" },
+              ]}
+            >
+              <Input.Password />
+            </Form.Item>
+
+            <div style={{ marginBottom: 16 }}>
+              Need an account?{" "}
+              <Link to="../signup">
+                <b>Sign Up</b>
+              </Link>
+            </div>
+            <Form.Item style={{ display: "flex", justifyContent: "center" }}>
+              <Button
+                type="primary"
+                htmlType="submit"
+                style={{ width: 200, height: 40 }}
+              >
+                Sign In
+              </Button>
+            </Form.Item>
+          </Form>
+        </Col>
+        <Col>
+          <img width="100%" height="100%" src={LoginImage}></img>
+        </Col>
       </Card>
     </div>
   );

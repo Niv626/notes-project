@@ -27,3 +27,10 @@ export const setFavoriteNote = async (note: Note) => {
   });
   return res.data;
 };
+
+export const setDeletedNote = async (note: Note) => {
+  const res = await app.patch(`/notes/trash/${note.id}`, {
+    isDeleted: !note.isDeleted,
+  });
+  return res.data;
+};

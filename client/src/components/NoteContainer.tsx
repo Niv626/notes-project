@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Note } from "./Notes";
 import {
   EditOutlined,
@@ -6,13 +6,21 @@ import {
   StarOutlined,
   StarFilled,
   PushpinOutlined,
+  DeleteFilled,
+  RestFilled,
+  RestOutlined,
 } from "@ant-design/icons";
 import "./note.css";
-import { removeNoteById, setFavoriteNote } from "../api/noteApi";
+import {
+  removeNoteById,
+  setDeletedNote,
+  setFavoriteNote,
+} from "../api/noteApi";
 import { useMutation, useQueryClient } from "react-query";
 import SunEditor from "suneditor-react";
 import EditNoteModal from "./Modals/AddEditModal/EditNoteModal";
-import { Button, Modal } from "antd";
+import { Tooltip } from "antd";
+import { useMatch } from "react-router-dom";
 
 export interface NoteProps {
   note: Note;
@@ -20,13 +28,20 @@ export interface NoteProps {
 
 const NoteContainer = ({ note }: NoteProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isNoteOpen, setIsNoteOpen] = useState(false);
+  const isTrashRoute = useMatch("dashboard/trash");
 
   const queryClient = useQueryClient();
 
-  const mutation = useMutation({
+  const deleteNoteForeverMutation = useMutation({
     mutationFn: removeNoteById,
     onSuccess: () => queryClient.invalidateQueries("notes"),
+  });
+
+  const deleteNoteMutation = useMutation({
+    mutationFn: setDeletedNote,
+    onSuccess: () => {
+      queryClient.invalidateQueries("notes");
+    },
   });
 
   const favoriteNoteMutation = useMutation({
@@ -40,7 +55,12 @@ const NoteContainer = ({ note }: NoteProps) => {
 
   return (
     <>
-      <div className="note">
+      <div
+        className="note"
+        style={{
+          backgroundColor: note.color,
+        }}
+      >
         <PushpinOutlined />
         <h1 className="title-truncate">{note.title}</h1>
         {/* <h3 className="body-truncate">{note.text}</h3> */}
@@ -51,34 +71,39 @@ const NoteContainer = ({ note }: NoteProps) => {
             <div
               style={{
                 overflow: "hidden",
-                // paddingBottom: "calc(100% - 100px)",
               }}
             >
               <SunEditor
-                // height="155px"
                 disable
                 disableToolbar
                 hideToolbar
                 setContents={note.text}
                 defaultValue={note.text}
-                setDefaultStyle="background-color: #f4f2e6; font-size: 50 px;border: none;     text-overflow: ellipsis;
+                setDefaultStyle={`background-color: ${note.color}; font-size: 50 px;border: none;     text-overflow: ellipsis;
                 overflow: hidden;
                 display: -webkit-box;
                 -webkit-line-clamp: 9;
-                -webkit-box-orient: vertical; padding: 0px"
+                -webkit-box-orient: vertical; padding: 0px`}
               ></SunEditor>
             </div>
             <div className="note-footer">
               {/* <small>{note?.date}</small>  // need to add date */}
+
               <div
                 className="update-note"
                 style={{ float: "left", paddingRight: 10 }}
               >
-                <EditOutlined
-                  onClick={() => {
-                    setIsModalOpen(true);
-                  }}
-                />
+                {!isTrashRoute && (
+                  <Tooltip title="Edit Note">
+                    <EditOutlined
+                      // style={{ filter: "drop-shadow(9px 8px 3px black)" }}
+                      onMouseMove={(e) => console.log("e", e)}
+                      onClick={() => {
+                        setIsModalOpen(true);
+                      }}
+                    />
+                  </Tooltip>
+                )}
                 <EditNoteModal
                   title={"Edit Note"}
                   setIsModalOpen={setIsModalOpen}
@@ -91,17 +116,41 @@ const NoteContainer = ({ note }: NoteProps) => {
                   onClick={() => favoriteNoteMutation.mutate(note)}
                   style={{ paddingLeft: 10, cursor: "pointer" }}
                 >
-                  {note.isFavorite ? <StarFilled /> : <StarOutlined />}
+                  <Tooltip
+                    title={`${
+                      note.isFavorite ? "Undo Favorite" : "Set Favorite"
+                    }`}
+                  >
+                    {!isTrashRoute &&
+                      (note.isFavorite ? <StarFilled /> : <StarOutlined />)}
+                  </Tooltip>
                 </span>
               </div>
-              <Button onClick={() => setIsNoteOpen((prev) => !prev)}>
-                open modal
-              </Button>
 
-              <div style={{ float: "right", paddingRight: 10 }}>
-                <DeleteOutlined
-                  onClick={() => mutation.mutate(noteId)}
-                ></DeleteOutlined>
+              <div
+                style={{ float: "right", paddingRight: 10, cursor: "pointer" }}
+              >
+                <Tooltip
+                  title={`${
+                    isTrashRoute ? "Delete Note Forever" : "Remove Note"
+                  }`}
+                >
+                  <DeleteOutlined
+                    onClick={() => {
+                      isTrashRoute
+                        ? deleteNoteForeverMutation.mutate(noteId)
+                        : deleteNoteMutation.mutate(note);
+                    }}
+                  />
+                </Tooltip>
+                {isTrashRoute && (
+                  <Tooltip title="Restore Note">
+                    <RestOutlined
+                      style={{ paddingLeft: 10 }}
+                      onClick={() => deleteNoteMutation.mutate(note)}
+                    />
+                  </Tooltip>
+                )}
               </div>
             </div>
           </>

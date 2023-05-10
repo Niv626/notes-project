@@ -13,7 +13,8 @@ export const login = async ({ email, password, firstName, lastName }) => {
 };
 
 export const app = axios.create({
-  baseURL: "https://note-me-server.onrender.com",
+  // baseURL: "https://note-me-server.onrender.com",
+  baseURL: "http://localhost:3333",
   headers: {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
@@ -26,12 +27,6 @@ app.interceptors.request.use(
     const token = localStorage.getItem("access_token");
     if (!token) return config;
     const { exp }: JwtPayload = ({} = jwtDecode(token));
-    // console.log(
-    //   "token && exp && Date.now() < exp * 1000",
-    //   token && exp && Date.now() < exp * 1000
-    // );
-    // console.log("token ", token);
-    // console.log("Date.now()", Date.now());
 
     if (token && exp && Date.now() < exp * 1000) {
       config.headers = {

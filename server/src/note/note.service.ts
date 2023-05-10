@@ -91,4 +91,30 @@ export class NoteService {
       },
     });
   }
+
+  async setDeletedNote(
+    userId: number,
+    noteId: number,
+    dto: Partial<EditNoteDto>,
+  ) {
+    const note = await this.prisma.note.findUnique({
+      where: {
+        id: noteId,
+      },
+    });
+
+    // check if user owns the note
+    if (!note || note.userId !== userId)
+      throw new ForbiddenException('Access to resources denied');
+
+    await this.prisma.note.update({
+      where: {
+        id: noteId,
+      },
+      data: {
+        isDeleted: dto.isDeleted,
+        ...dto,
+      },
+    });
+  }
 }

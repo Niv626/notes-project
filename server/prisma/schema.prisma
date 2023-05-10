@@ -38,6 +38,8 @@ model Note {
   user   User @relation(fields: [userId], references: [id])
 
   isFavorite Boolean @default(false)
+  isDeleted Boolean @default(false)
+
 
   @@map("notes")
 }

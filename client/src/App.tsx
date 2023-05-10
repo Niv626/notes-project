@@ -6,9 +6,9 @@ import { AuthContext, AuthData } from "./context/AuthContext";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import ProtectedRoutes from "./components/ProtectedRoutes";
-import ContentPage from "./components/ContentPage";
+import ContentPage from "./pages/ContentPage";
 import LeftBar from "./components/LeftBar";
-import Background from "./assets/pexels-fwstudio-129731.jpg";
+import Background from "./assets/cork-board.jpg";
 import Settings from "./pages/Settings";
 
 const queryClient = new QueryClient();
@@ -61,6 +61,7 @@ function App() {
           <Route path="/dashboard" element={<LayoutPage />}>
             <Route index element={<ContentPage />}></Route>
             <Route path="favorite" element={<ContentPage />}></Route>
+            <Route path="trash" element={<ContentPage />}></Route>
             <Route path="about" element={<Settings />}></Route>
           </Route>
         </Route>

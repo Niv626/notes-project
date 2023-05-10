@@ -65,4 +65,13 @@ export class NoteController {
   ) {
     return this.notesService.setNoteFavorite(userId, noteId, dto);
   }
+
+  @Patch('trash/:id')
+  setDeletedNote(
+    @GetUser('id') userId: number,
+    @Param('id', ParseIntPipe) noteId: number,
+    @Body() dto: Partial<EditNoteDto>,
+  ) {
+    return this.notesService.setDeletedNote(userId, noteId, dto);
+  }
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SunEditor from "suneditor-react";
 import "suneditor/dist/css/suneditor.min.css";
 import "./text-editor.css";
@@ -8,12 +8,12 @@ const buttonList = [
   ["font", "fontSize", "formatBlock"],
   ["paragraphStyle", "blockquote"],
   ["bold", "underline", "italic", "strike", "subscript", "superscript"],
-  ["fontColor", "hiliteColor", "textStyle"],
+  // ["fontColor", "hiliteColor", "textStyle"],
   ["removeFormat"],
   // "/", // Line break
   ["outdent", "indent"],
   // ["align", "horizontalRule", "list", "lineHeight"],
-  ["table", "link", "image", "audio" /** ,'math' */], // You must add the 'katex' library at options to use the 'math' plugin.
+  ["table", "link", "image", "video", "audio" /** ,'math' */], // You must add the 'katex' library at options to use the 'math' plugin.
   /** ['imageGallery'] */ // You must add the "imageGalleryUrl".
   ["fullScreen", "showBlocks", "codeView"],
   ["preview", "print"],
@@ -22,13 +22,19 @@ const buttonList = [
 ];
 
 const TextEditor = (props) => {
+  const [val, setVal] = useState(props?.defaultValue);
+
+  useEffect(() => {
+    setVal(props?.defaultValue);
+  }, [props?.defaultValue]);
   return (
     <SunEditor
-      setContents={props?.defaultValue}
+      setContents={val}
       autoFocus={true}
       setAllPlugins
-      onChange={(text) => props.handleTextChange(text)}
       height="300px"
+      // setAllPlugins={false}
+      onChange={(text) => props.handleTextChange(text)}
       setOptions={{
         buttonList,
       }}

@@ -56,8 +56,6 @@ const Singup = () => {
       <Card title={<b>Sing Up</b>} className="signup-login-card">
         <Form
           name="basic"
-          // labelCol={{ span: 15 }}
-          // wrapperCol={{ span: 60 }}
           initialValues={{ remember: false }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
@@ -66,7 +64,6 @@ const Singup = () => {
         >
           <b>Email</b>
           <Form.Item
-            // label="Email"
             name="email"
             rules={[{ required: true, message: "Please input your email!" }]}
           >
@@ -75,7 +72,6 @@ const Singup = () => {
 
           <b>First Name</b>
           <Form.Item
-            // label="Email"
             name="name"
             rules={[{ required: true, message: "Please input your name!" }]}
           >
@@ -84,7 +80,6 @@ const Singup = () => {
 
           <b>Last Name</b>
           <Form.Item
-            // label="Email"
             name="lastName"
             rules={[
               { required: true, message: "Please input your last name!" },
@@ -95,7 +90,6 @@ const Singup = () => {
 
           <b>Password</b>
           <Form.Item
-            // label="Password"
             name="password"
             rules={[{ required: true, message: "Please input your password!" }]}
           >
@@ -103,7 +97,6 @@ const Singup = () => {
           </Form.Item>
           <b>Password Confirmation</b>
           <Form.Item
-            // label="Password Confirmation"
             name="password-confirm"
             style={{ width: "100%", marginBottom: 5 }}
             rules={[{ required: true, message: "Please input your password!" }]}

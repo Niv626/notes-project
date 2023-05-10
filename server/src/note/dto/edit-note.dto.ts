@@ -10,4 +10,5 @@ export class EditNoteDto {
   text?: string;
 
   isFavorite: boolean = false;
+  isDeleted: boolean = false;
 }

@@ -1,20 +1,18 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import {
   BookOutlined,
   ContainerOutlined,
-  DesktopOutlined,
+  DeleteOutlined,
   LogoutOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  PieChartOutlined,
   ProfileOutlined,
+  SettingOutlined,
 } from "@ant-design/icons";
-import { Col, MenuProps } from "antd";
-import { Button, Menu } from "antd";
+
+import { Col, MenuProps, Button, Menu } from "antd";
 import "./leftbar.css";
-import { Link, useLocation, useMatch, useNavigate } from "react-router-dom";
-import { useQuery } from "react-query";
-import { getNotes } from "../api/noteApi";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext, AuthData } from "../context/AuthContext";
 import "./leftbar.css";
 
@@ -23,7 +21,8 @@ type MenuItem = Required<MenuProps>["items"][number];
 const routes = {
   "/dashboard": "1",
   "/dashboard/favorite": "2",
-  "/dashboard/about": "3",
+  "/dashboard/trash": "3",
+  "/dashboard/about": "4",
 };
 
 function getItem(
@@ -58,10 +57,17 @@ const items: MenuItem[] = [
     </Link>
   ),
   getItem(
-    "Settings",
+    "Trash",
     "3",
+    <Link replace to={"/dashboard/trash"}>
+      <DeleteOutlined />
+    </Link>
+  ),
+  getItem(
+    "Settings",
+    "4",
     <Link replace to={"/dashboard/about"}>
-      <ContainerOutlined />
+      <SettingOutlined />
     </Link>
   ),
 ];
@@ -71,9 +77,7 @@ const LeftBar = () => {
     useContext(AuthContext);
   // const { data: notes, refetch } = useQuery("notes", getNotes);
   const navigate = useNavigate();
-  const isFavoriteRoute = useMatch("dashboard");
   const location = useLocation();
-  console.log("location", routes[location.pathname]);
   const logout = () => {
     setAuth && setAuth({ accessToken: "" });
     localStorage.removeItem("access_token");
@@ -92,7 +96,7 @@ const LeftBar = () => {
       <Col span={collapsed ? 1 : 3} style={{ height: "100vh", width: "100vh" }}>
         <div className="left-bar">
           <Button
-            style={{ position: "absolute" }}
+            style={{ position: "absolute", left: 0 }}
             type="primary"
             onClick={toggleCollapsed}
           >
@@ -104,7 +108,7 @@ const LeftBar = () => {
             defaultOpenKeys={["sub1"]}
             mode="inline"
             theme="dark"
-            style={{ paddingTop: 50 }}
+            style={{ paddingTop: 81 }}
             inlineCollapsed={collapsed}
             items={items}
           />

@@ -69,48 +69,6 @@ const EditNoteModal = ({
       setNoteText={setNoteText}
       noteText={noteText}
     ></AddEditModal>
-    // <Modal
-    //   title={title}
-    //   open={isModalOpen}
-    //   onOk={saveClick}
-    //   onCancel={handleCancel}
-    //   style={{ width: 1500, minWidth: 735 }}
-    //   bodyStyle={{ height: 500 }}
-    //   footer={[
-    //     <Button onClick={handleCancel} key="2">
-    //       Cancel
-    //     </Button>,
-    //     <Button type="primary" onClick={saveClick} key="Ok">
-    //       Save
-    //     </Button>,
-    //   ]}
-    // >
-    //   <Input
-    //     showCount
-    //     maxLength={20}
-    //     onChange={handleTitleChange}
-    //     value={noteTitle}
-    //     placeholder="title.."
-    //     required
-    //   />
-    //   <br />
-    //   <br />
-    //   <div style={{ border: "1px solid" }}>
-    //     <TextEditor
-    //       defaultValue={note.text}
-    //       handleTextChange={setNoteText}
-    //     ></TextEditor>
-    //   </div>
-
-    //   {/* <TextArea
-    //         showCount
-    //         maxLength={500}
-    //         onChange={handleTextChange}
-    //         value={noteText}
-    //         placeholder="add text.."
-    //         style={{ height: "80%", width: "100%" }}
-    //       /> */}
-    // </Modal>
   );
 };
 

@@ -21,7 +21,7 @@ const AddEditModal = ({
       onOk={saveClick}
       onCancel={handleCancel}
       style={{ width: 1500, minWidth: 735 }}
-      bodyStyle={{ height: 500 }}
+      bodyStyle={{ height: 460 }}
       footer={[
         <Button onClick={handleCancel} key="2">
           Cancel
@@ -46,7 +46,8 @@ const AddEditModal = ({
       />
       <br />
       <br />
-      <div style={{ border: "1px solid" }}>
+
+      <div style={{ outline: "1px solid #dadada" }}>
         <TextEditor
           handleTextChange={setNoteText}
           defaultValue={defaultValue}
