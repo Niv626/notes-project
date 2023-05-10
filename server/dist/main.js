@@ -8,7 +8,7 @@ async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     app.enableCors({
         credentials: true,
-        origin: 'http://localhost:3000',
+        origin: 'https://note-me.onrender.com',
     });
     app.use(bodyParser.json({ limit: '50mb' }));
     app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
