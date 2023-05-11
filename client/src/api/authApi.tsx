@@ -21,8 +21,8 @@ export const signup = async ({ email, password, firstName, lastName }) => {
 };
 
 export const app = axios.create({
-  // baseURL: "https://note-me-server.onrender.com",
-  baseURL: "http://localhost:3333",
+  baseURL: "https://note-me-server.onrender.com",
+  // baseURL: "http://localhost:3333",
   headers: {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
