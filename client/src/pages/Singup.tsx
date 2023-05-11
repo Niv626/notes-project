@@ -2,9 +2,10 @@ import React, { SetStateAction, Dispatch, useContext } from "react";
 import { Card, Form, Input, Button } from "antd";
 import "./singup.css";
 import { Link, useNavigate } from "react-router-dom";
-import api from "../api/authApi";
+import api, { signup } from "../api/authApi";
 import { AuthContext } from "../context/AuthContext";
 import { openNotification } from "../utils/openNotification";
+import { useMutation } from "react-query";
 
 // switch to react query
 
@@ -20,31 +21,23 @@ const Singup = () => {
   const { setAuth }: any = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const onFinish = (values: SingupProps) => {
-    // use react query instead
-    const userData = async () => {
-      api
-        .post(
-          `/auth/signup`,
-          JSON.stringify({
-            email: values.email,
-            password: values.password,
-            firstName: values.name,
-            lastName: values.lastName,
-          })
-        )
-        .then((res) => {
-          if (true) {
-            setAuth({ accessToken: res.data["access_token"] });
-            navigate("../login", { replace: true });
-          } else {
-            openNotification("topLeft", "");
-          }
-        })
-        .catch((e) => openNotification("topLeft", ""));
-    };
+  const mutation = useMutation({
+    mutationFn: signup,
+    onSuccess: (response) => {
+      setAuth({ accessToken: response.data["access_token"] });
+      navigate("../login", { replace: true });
+    },
+    onError: ({ response }) => {
+      if (response.status === 403)
+        openNotification("topLeft", "Email is already taken");
+      else
+        openNotification("topLeft", response.data.message || "Unknown Error");
+    },
+  });
 
-    userData();
+  const onFinish = (values) => {
+    const { passwordConfirm, ...rest } = values;
+    mutation.mutate(rest);
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -72,7 +65,7 @@ const Singup = () => {
 
           <b>First Name</b>
           <Form.Item
-            name="name"
+            name="firstName"
             rules={[{ required: true, message: "Please input your name!" }]}
           >
             <Input />
@@ -97,14 +90,33 @@ const Singup = () => {
           </Form.Item>
           <b>Password Confirmation</b>
           <Form.Item
-            name="password-confirm"
+            name="passwordConfirm"
             style={{ width: "100%", marginBottom: 5 }}
-            rules={[{ required: true, message: "Please input your password!" }]}
+            dependencies={["password"]}
+            hasFeedback
+            rules={[
+              {
+                required: true,
+                message: "Please confirm your password!",
+              },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue("password") === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(
+                    new Error(
+                      "The two passwords that you entered do not match!"
+                    )
+                  );
+                },
+              }),
+            ]}
           >
             <Input.Password className="signup-input" />
           </Form.Item>
           <div>
-            <div style={{ marginBottom: 30 }}>
+            <div style={{ marginBottom: 30, paddingTop: 15 }}>
               Already have an account?{" "}
               <Link to="/login">
                 <b>Log In</b>

@@ -1,9 +1,9 @@
-import React, { Dispatch, SetStateAction, useContext } from "react";
+import React, { useContext } from "react";
 import { Card, Form, Input, Button, Col } from "antd";
 import "./singup.css";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import api, { login } from "../api/authApi";
+import { login } from "../api/authApi";
 import { useNavigate } from "react-router-dom";
 import { openNotification } from "../utils/openNotification";
 import { useMutation, useQueryClient } from "react-query";
@@ -49,7 +49,6 @@ const Login = () => {
   return (
     <div className="site-card-border-less-wrapper">
       <Card
-        // bordered={false}
         style={{
           display: "flex",
           flexDirection: "column",

@@ -1,8 +1,8 @@
 .user-details {
-  background-color: #00152a;
+  background-color: rgb(233, 233, 233);
   border-radius: 50%;
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,7 +17,7 @@
 
 .menu-left-bar {
   padding: 15px;
-  background-color: rgb(120 201 170 / 93%);
+  background-color: rgba(179, 252, 224, 0.93);
   top: 0;
   z-index: 1;
 }
@@ -27,4 +27,12 @@
   width: 100%;
   position: fixed;
   overflow-x: hidden;
+}
+
+.text-capitalize {
+  text-transform: capitalize;
+}
+
+.uppercase-first-letter::first-letter {
+  text-transform: uppercase;
 }

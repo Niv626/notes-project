@@ -69,17 +69,13 @@ const ContentPage = ({ favorite }: ContentPageProps) => {
               <Tooltip
                 title={
                   <>
-                    {user?.firstName}
-                    {user?.lastName}
-                    <br></br>
-                    {user?.email}
+                    <div className="text-capitalize">{`${user?.firstName} ${user?.lastName}`}</div>
+                    <div className="uppercase-first-letter">{user?.email}</div>
                   </>
                 }
               >
                 <div className="user-details">
-                  <b style={{ color: "white" }}>
-                    {user?.firstName.at(0).toUpperCase()}{" "}
-                  </b>
+                  <b>{user?.firstName.at(0).toUpperCase()}</b>
                 </div>
               </Tooltip>
             </div>

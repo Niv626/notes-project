@@ -1,4 +1,4 @@
-import React, { useState, SetStateAction, Dispatch, useContext } from "react";
+import React, { useState, SetStateAction, Dispatch, memo } from "react";
 import { Modal, Input, Button } from "antd";
 import { useMutation, useQueryClient } from "react-query";
 import { addNote } from "../../../api/noteApi";
@@ -33,10 +33,6 @@ const AddNoteModal = ({
     },
   });
 
-  const handleTextChange = (event: event) => {
-    setNoteText(event.target.value);
-  };
-
   const handleTitleChange = (event: event) => {
     setNoteTitle(event.target.value);
   };
@@ -56,18 +52,18 @@ const AddNoteModal = ({
 
   return (
     <AddEditModal
+      content={"<p></p>"}
+      destroyOnClose
       defaultValue={""}
-      title={title}
+      title={"Add New Note"}
       isModalOpen={isModalOpen}
       saveClick={saveClick}
       handleCancel={handleCancel}
       noteTitle={noteTitle}
       handleTitleChange={handleTitleChange}
       handleTextChange={setNoteText}
-      setNoteText={setNoteText}
-      noteText={noteText}
     ></AddEditModal>
   );
 };
 
-export default AddNoteModal;
+export default memo(AddNoteModal);

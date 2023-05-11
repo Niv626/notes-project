@@ -48,7 +48,9 @@ const AddNote = ({ notesLength }) => {
           <div style={{ position: "absolute", bottom: 30, right: 30 }}>
             <Tooltip title="Add New Note" defaultOpen>
               <PlusCircleTwoTone
-                onClick={() => setIsModalOpen(true)}
+                onClick={() => {
+                  setIsModalOpen(true);
+                }}
                 style={{ fontSize: "6.5rem" }}
               />
             </Tooltip>
@@ -66,17 +68,3 @@ const AddNote = ({ notesLength }) => {
 };
 
 export default AddNote;
-
-{
-  /* <Button
-        style={{
-          width: 150,
-          color: "white",
-          backgroundColor: "black",
-        }}
-        onClick={() => setIsModalOpen(true)}
-      >
-        <PlusCircleOutlined style={{ fontSize: 15 }} />S
-        Add new note
-      </Button> */
-}

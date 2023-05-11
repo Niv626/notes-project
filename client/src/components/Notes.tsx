@@ -22,6 +22,7 @@ export interface Note {
   type: string;
   id: number;
   color?: string;
+  updatedAt: Date;
 }
 
 export interface NotesProps {

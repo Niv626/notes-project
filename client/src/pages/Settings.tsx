@@ -13,12 +13,7 @@ const Settings: React.FC = () => {
     onSuccess: () => {
       form.resetFields(["password"]);
     },
-    // onError: ({ response }) => {
-
-    // },
   });
-
-  //   const editUser = mutation
 
   return (
     <Card title="Settings" style={{ height: "90%", margin: 50 }}>
@@ -46,12 +41,7 @@ const Settings: React.FC = () => {
           </Form.Item>
         </Form>
       </Card>
-      <Card
-        style={{ marginTop: 16 }}
-        type="inner"
-        title="Export Notes"
-        //   extra={<a href="#">More</a>}
-      >
+      <Card style={{ marginTop: 16 }} type="inner" title="Export Notes">
         <Button size="middle" type="primary">
           Export
         </Button>

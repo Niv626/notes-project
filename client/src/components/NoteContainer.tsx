@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { Note } from "./Notes";
 import {
   EditOutlined,
@@ -6,8 +6,6 @@ import {
   StarOutlined,
   StarFilled,
   PushpinOutlined,
-  DeleteFilled,
-  RestFilled,
   RestOutlined,
 } from "@ant-design/icons";
 import "./note.css";
@@ -17,10 +15,10 @@ import {
   setFavoriteNote,
 } from "../api/noteApi";
 import { useMutation, useQueryClient } from "react-query";
-import SunEditor from "suneditor-react";
 import EditNoteModal from "./Modals/AddEditModal/EditNoteModal";
 import { Tooltip } from "antd";
 import { useMatch } from "react-router-dom";
+import TextEditor from "./TextEditor";
 
 export interface NoteProps {
   note: Note;
@@ -29,6 +27,9 @@ export interface NoteProps {
 const NoteContainer = ({ note }: NoteProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isTrashRoute = useMatch("dashboard/trash");
+
+  const { updatedAt } = note;
+  const lastUpdate = new Date(updatedAt);
 
   const queryClient = useQueryClient();
 
@@ -63,7 +64,6 @@ const NoteContainer = ({ note }: NoteProps) => {
       >
         <PushpinOutlined />
         <h1 className="title-truncate">{note.title}</h1>
-        {/* <h3 className="body-truncate">{note.text}</h3> */}
         {note.type === "template" ? (
           <>{note.text}</>
         ) : (
@@ -73,22 +73,21 @@ const NoteContainer = ({ note }: NoteProps) => {
                 overflow: "hidden",
               }}
             >
-              <SunEditor
+              <TextEditor
                 disable
                 disableToolbar
                 hideToolbar
-                setContents={note.text}
+                content={note.text}
                 defaultValue={note.text}
                 setDefaultStyle={`background-color: ${note.color}; font-size: 50 px;border: none;     text-overflow: ellipsis;
-                overflow: hidden;
-                display: -webkit-box;
-                -webkit-line-clamp: 9;
-                -webkit-box-orient: vertical; padding: 0px`}
-              ></SunEditor>
+                              overflow: hidden;
+                              display: -webkit-box;
+                              -webkit-line-clamp: 9;max-height: 180px; 
+                              -webkit-box-orient: vertical; padding: 0px`}
+              ></TextEditor>
             </div>
             <div className="note-footer">
               {/* <small>{note?.date}</small>  // need to add date */}
-
               <div
                 className="update-note"
                 style={{ float: "left", paddingRight: 10 }}
@@ -97,7 +96,7 @@ const NoteContainer = ({ note }: NoteProps) => {
                   <Tooltip title="Edit Note">
                     <EditOutlined
                       // style={{ filter: "drop-shadow(9px 8px 3px black)" }}
-                      onMouseMove={(e) => console.log("e", e)}
+                      // onMouseMove={(e) => console.log("e", e)}
                       onClick={() => {
                         setIsModalOpen(true);
                       }}
@@ -126,7 +125,15 @@ const NoteContainer = ({ note }: NoteProps) => {
                   </Tooltip>
                 </span>
               </div>
-
+              <small>
+                Last Update:
+                {lastUpdate.toLocaleString("en-US", {
+                  day: "numeric",
+                  hour: "numeric",
+                  minute: "numeric",
+                  month: "short",
+                })}
+              </small>
               <div
                 style={{ float: "right", paddingRight: 10, cursor: "pointer" }}
               >
@@ -160,4 +167,4 @@ const NoteContainer = ({ note }: NoteProps) => {
   );
 };
 
-export default NoteContainer;
+export default memo(NoteContainer);

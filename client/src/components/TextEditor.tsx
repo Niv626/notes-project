@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import SunEditor from "suneditor-react";
 import "suneditor/dist/css/suneditor.min.css";
 import "./text-editor.css";
@@ -8,7 +8,7 @@ const buttonList = [
   ["font", "fontSize", "formatBlock"],
   ["paragraphStyle", "blockquote"],
   ["bold", "underline", "italic", "strike", "subscript", "superscript"],
-  // ["fontColor", "hiliteColor", "textStyle"],
+  ["fontColor", "hiliteColor", "textStyle"],
   ["removeFormat"],
   // "/", // Line break
   ["outdent", "indent"],
@@ -22,23 +22,25 @@ const buttonList = [
 ];
 
 const TextEditor = (props) => {
-  const [val, setVal] = useState(props?.defaultValue);
-
-  useEffect(() => {
-    setVal(props?.defaultValue);
-  }, [props?.defaultValue]);
   return (
     <SunEditor
-      setContents={val}
-      autoFocus={true}
-      setAllPlugins
-      height="300px"
-      // setAllPlugins={false}
-      onChange={(text) => props.handleTextChange(text)}
+      setContents={props?.content}
+      autoFocus={false}
+      placeholder="Add note"
+      onChange={
+        props?.handleTextChange
+          ? (text) => props?.handleTextChange(text)
+          : undefined
+      }
       setOptions={{
         buttonList,
       }}
+      disable={props?.disable}
+      disableToolbar={props?.disableToolbar}
+      hideToolbar={props?.hideToolbar}
+      defaultValue={props?.defaultValue}
+      setDefaultStyle={props?.setDefaultStyle}
     />
   );
 };
-export default TextEditor;
+export default memo(TextEditor);

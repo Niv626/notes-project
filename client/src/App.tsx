@@ -13,14 +13,6 @@ import Settings from "./pages/Settings";
 
 const queryClient = new QueryClient();
 
-// function getAuthExpiration() {
-//   const storedExpirationDate = localStorage.getItem("expiration");
-//   const expirationDate = new Date(storedExpirationDate as any);
-//   const now = new Date();
-//   const duration = expirationDate.getTime() - now.getTime();
-//   return duration;
-// }
-
 export const LayoutPage = () => {
   const { collapsed }: AuthData = useContext(AuthContext);
 

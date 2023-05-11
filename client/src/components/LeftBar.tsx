@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import {
   BookOutlined,
-  ContainerOutlined,
   DeleteOutlined,
   LogoutOutlined,
   MenuFoldOutlined,
@@ -101,20 +100,17 @@ const LeftBar = () => {
             onClick={toggleCollapsed}
           >
             {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}{" "}
-            {/* TODO: Change icons */}
           </Button>
           <Menu
             defaultSelectedKeys={routes[location.pathname]}
             defaultOpenKeys={["sub1"]}
             mode="inline"
-            theme="dark"
-            style={{ paddingTop: 81 }}
+            style={{ paddingTop: 81, backgroundColor: "#e9e9e9" }}
             inlineCollapsed={collapsed}
             items={items}
           />
           <div style={{ position: "absolute", bottom: 0, paddingBottom: 10 }}>
             {collapsed ? (
-              // <MenuUnfoldOutlined />
               <LogoutOutlined
                 onClick={logout}
                 style={{ color: "white", fontSize: 25 }}
@@ -128,7 +124,6 @@ const LeftBar = () => {
           </div>
         </div>
       </Col>
-      {/* <Outlet /> */}
     </>
   );
 };

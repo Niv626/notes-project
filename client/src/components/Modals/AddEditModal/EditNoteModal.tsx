@@ -47,6 +47,8 @@ const EditNoteModal = ({
       id: noteId,
       isFavorite: false,
       type: "note",
+      isDeleted: false,
+      updatedAt: new Date(),
     };
     mutation.mutate(note);
     setIsModalOpen(false);
@@ -58,6 +60,7 @@ const EditNoteModal = ({
 
   return (
     <AddEditModal
+      content={note.text}
       defaultValue={note.text}
       title={title}
       isModalOpen={isModalOpen}
@@ -66,8 +69,7 @@ const EditNoteModal = ({
       noteTitle={noteTitle}
       handleTitleChange={handleTitleChange}
       handleTextChange={setNoteText}
-      setNoteText={setNoteText}
-      noteText={noteText}
+      destroyOnClose={false}
     ></AddEditModal>
   );
 };

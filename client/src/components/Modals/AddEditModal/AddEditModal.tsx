@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Modal, Input, Button } from "antd";
 import TextEditor from "../../TextEditor";
 
@@ -9,19 +9,19 @@ const AddEditModal = ({
   handleCancel,
   noteTitle,
   handleTitleChange,
-  handleTextChange,
-  setNoteText,
-  noteText,
+  content,
   defaultValue,
+  destroyOnClose,
+  handleTextChange,
 }) => {
   return (
     <Modal
       title={title}
       open={isModalOpen}
       onOk={saveClick}
+      destroyOnClose={destroyOnClose}
       onCancel={handleCancel}
       style={{ width: 1500, minWidth: 735 }}
-      bodyStyle={{ height: 460 }}
       footer={[
         <Button onClick={handleCancel} key="2">
           Cancel
@@ -38,10 +38,11 @@ const AddEditModal = ({
     >
       <Input
         showCount
+        autoFocus
         maxLength={20}
         onChange={handleTitleChange}
         value={noteTitle}
-        placeholder="title.."
+        placeholder="title..."
         required
       />
       <br />
@@ -49,7 +50,8 @@ const AddEditModal = ({
 
       <div style={{ outline: "1px solid #dadada" }}>
         <TextEditor
-          handleTextChange={setNoteText}
+          content={content}
+          handleTextChange={handleTextChange}
           defaultValue={defaultValue}
         ></TextEditor>
       </div>
@@ -57,4 +59,4 @@ const AddEditModal = ({
   );
 };
 
-export default AddEditModal;
+export default memo(AddEditModal);
