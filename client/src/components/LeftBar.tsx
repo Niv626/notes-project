@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   BookOutlined,
   DeleteOutlined,
@@ -74,6 +74,8 @@ const items: MenuItem[] = [
 const LeftBar = () => {
   const { setAuth, collapsed, setCollapsed }: AuthData =
     useContext(AuthContext);
+  const [isMobile, setIsMobile] = useState(false);
+
   // const { data: notes, refetch } = useQuery("notes", getNotes);
   const navigate = useNavigate();
   const location = useLocation();
@@ -89,6 +91,27 @@ const LeftBar = () => {
     }
     localStorage.setItem("collapsed", JSON.stringify(!collapsed));
   };
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768); // Change the threshold as per your requirements
+    };
+
+    handleResize(); // Initial check
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) {
+      setCollapsed && setCollapsed(true);
+      localStorage.setItem("collapsed", JSON.stringify(true));
+    }
+  }, [isMobile, setCollapsed]);
 
   return (
     <>

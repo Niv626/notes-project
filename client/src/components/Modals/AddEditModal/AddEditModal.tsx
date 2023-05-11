@@ -21,7 +21,7 @@ const AddEditModal = ({
       onOk={saveClick}
       destroyOnClose={destroyOnClose}
       onCancel={handleCancel}
-      style={{ width: 1500, minWidth: 735 }}
+      style={{ width: 1500, minWidth: "45%" }}
       footer={[
         <Button onClick={handleCancel} key="2">
           Cancel
