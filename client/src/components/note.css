@@ -24,7 +24,7 @@
   display: grid;
   grid-template-columns: repeat(4, 210px);
   grid-auto-rows: minmax(200px, 280px);
-  row-gap: 10px;
+  /* row-gap: 10px; */
   gap: 90px;
   grid-template-areas: "header header";
   padding-left: 5%;
