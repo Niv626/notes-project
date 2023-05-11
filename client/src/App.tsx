@@ -15,7 +15,6 @@ const queryClient = new QueryClient();
 
 export const LayoutPage = () => {
   const { collapsed }: AuthData = useContext(AuthContext);
-
   return (
     <>
       <LeftBar />
