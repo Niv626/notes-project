@@ -1,0 +1,15 @@
+.left-bar {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  max-width: inherit;
+  min-width: 67px;
+  width: auto;
+  z-index: 2;
+}
+
+.ant-menu-item:last-child {
+  position: absolute !important;
+  bottom: 0;
+}

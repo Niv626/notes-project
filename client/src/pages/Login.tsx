@@ -57,7 +57,7 @@ const Login = () => {
         bodyStyle={{ padding: 0 }}
         className="signup-login-card"
       >
-        <Col span={12}>
+        <Col span={24}>
           <Form
             name="basic"
             initialValues={{ remember: false }}
@@ -68,7 +68,13 @@ const Login = () => {
             <b>Email</b>
             <Form.Item
               name="email"
-              rules={[{ required: true, message: "Please input your email!" }]}
+              rules={[
+                {
+                  type: "email",
+                  message: "The input is not valid email!",
+                  required: true,
+                },
+              ]}
             >
               <Input />
             </Form.Item>
@@ -99,9 +105,9 @@ const Login = () => {
             </Form.Item>
           </Form>
         </Col>
-        <Col>
+        {/* <Col>
           <img width="100%" height="100%" src={LoginImage}></img>
-        </Col>
+        </Col> */}
       </Card>
     </div>
   );

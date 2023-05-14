@@ -1,8 +1,0 @@
-.left-bar {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  position: fixed;
-  width: 100%;
-  max-width: inherit;
-}

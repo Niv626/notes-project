@@ -1,5 +1,5 @@
 import React, { useState, SetStateAction, Dispatch } from "react";
-import { Note } from "../../Notes";
+import { Note } from "../../Notes/Notes";
 import { useMutation, useQueryClient } from "react-query";
 import { editNote } from "../../../api/noteApi";
 import AddEditModal from "./AddEditModal";
@@ -57,20 +57,24 @@ const EditNoteModal = ({
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+  console.log("note.updatedAt", note.updatedAt);
 
   return (
-    <AddEditModal
-      content={note.text}
-      defaultValue={note.text}
-      title={title}
-      isModalOpen={isModalOpen}
-      saveClick={saveClick}
-      handleCancel={handleCancel}
-      noteTitle={noteTitle}
-      handleTitleChange={handleTitleChange}
-      handleTextChange={setNoteText}
-      destroyOnClose={false}
-    ></AddEditModal>
+    <>
+      <AddEditModal
+        content={note.text}
+        defaultValue={note.text}
+        title={title}
+        isModalOpen={isModalOpen}
+        saveClick={saveClick}
+        handleCancel={handleCancel}
+        noteTitle={noteTitle}
+        handleTitleChange={handleTitleChange}
+        handleTextChange={setNoteText}
+        destroyOnClose={false}
+        updatedAt={note.updatedAt}
+      ></AddEditModal>
+    </>
   );
 };
 

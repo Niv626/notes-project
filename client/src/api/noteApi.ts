@@ -1,4 +1,4 @@
-import { Note } from "../components/Notes";
+import { Note } from "../components/Notes/Notes";
 import app from "./authApi";
 
 export const getNotes = async () => {

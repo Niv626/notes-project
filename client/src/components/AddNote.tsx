@@ -1,10 +1,9 @@
 import { Button, Tooltip } from "antd";
 import React, { useState } from "react";
 import AddNoteModal from "./Modals/AddEditModal/AddNoteModal";
-import { PlusCircleOutlined, PlusCircleTwoTone } from "@ant-design/icons";
+import { PlusCircleTwoTone } from "@ant-design/icons";
 import Icon from "../assets/3209265-modified.png";
 import { useMatch } from "react-router-dom";
-// import { ReactComponent as Icon } from "../assets/3209265.svg";
 
 const AddNote = ({ notesLength }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -45,13 +44,13 @@ const AddNote = ({ notesLength }) => {
             </div>
           </div>
         ) : (
-          <div style={{ position: "absolute", bottom: 30, right: 30 }}>
+          <div style={{ position: "fixed", bottom: 35, right: 35, zIndex: 1 }}>
             <Tooltip title="Add New Note" defaultOpen>
               <PlusCircleTwoTone
                 onClick={() => {
                   setIsModalOpen(true);
                 }}
-                style={{ fontSize: "6.5rem" }}
+                style={{ fontSize: "5rem" }}
               />
             </Tooltip>
           </div>

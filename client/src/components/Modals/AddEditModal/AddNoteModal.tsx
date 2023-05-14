@@ -62,6 +62,7 @@ const AddNoteModal = ({
       noteTitle={noteTitle}
       handleTitleChange={handleTitleChange}
       handleTextChange={setNoteText}
+      updatedAt={null}
     ></AddEditModal>
   );
 };

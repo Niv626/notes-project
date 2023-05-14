@@ -6,19 +6,24 @@ import { AuthContext, AuthData } from "./context/AuthContext";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import ProtectedRoutes from "./components/ProtectedRoutes";
-import ContentPage from "./pages/ContentPage";
-import LeftBar from "./components/LeftBar";
+import ContentPage from "./pages/ContentPage/ContentPage";
+import LeftBar from "./components/LeftBar/LeftBar";
 import Background from "./assets/cork-board.jpg";
 import Settings from "./pages/Settings";
+import { Col, Row } from "antd";
 
 const queryClient = new QueryClient();
 
 export const LayoutPage = () => {
   const { collapsed }: AuthData = useContext(AuthContext);
   return (
-    <>
-      <LeftBar />
-      <div
+    <Row style={{ width: "100%" }}>
+      <Col span={collapsed ? 1 : 3} style={{ height: "100vh" }}>
+        <LeftBar />
+      </Col>
+      <Col
+        span={collapsed ? 23 : 21}
+        className="top-bar-collapsed"
         style={{
           backgroundImage: `url(${Background})`,
           width: collapsed ? "95.834%" : "87.5%",
@@ -26,8 +31,8 @@ export const LayoutPage = () => {
         }}
       >
         <Outlet />
-      </div>
-    </>
+      </Col>
+    </Row>
   );
 };
 

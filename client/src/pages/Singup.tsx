@@ -58,7 +58,13 @@ const Singup = () => {
           <b>Email</b>
           <Form.Item
             name="email"
-            rules={[{ required: true, message: "Please input your email!" }]}
+            rules={[
+              {
+                type: "email",
+                message: "The input is not valid email!",
+                required: true,
+              },
+            ]}
           >
             <Input />
           </Form.Item>

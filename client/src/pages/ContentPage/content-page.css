@@ -17,14 +17,15 @@
 
 .menu-left-bar {
   padding: 15px;
-  background-color: rgba(179, 252, 224, 0.93);
+  background-color: rgba(0, 0, 0, 0.329);
   top: 0;
   z-index: 1;
+  padding-left: 58px;
 }
 
 .top-bar-collapsed {
   height: 100vh;
-  width: 100%;
+  /* width: 100%; */
   position: fixed;
   overflow-x: hidden;
 }

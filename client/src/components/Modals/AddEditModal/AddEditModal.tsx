@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { Modal, Input, Button } from "antd";
-import TextEditor from "../../TextEditor";
+import TextEditor from "../../TextEditor/TextEditor";
 
 const AddEditModal = ({
   title,
@@ -13,7 +13,9 @@ const AddEditModal = ({
   defaultValue,
   destroyOnClose,
   handleTextChange,
+  updatedAt,
 }) => {
+  const lastUpdate = updatedAt ? new Date(updatedAt) : null;
   return (
     <Modal
       title={title}
@@ -34,6 +36,27 @@ const AddEditModal = ({
         >
           Save
         </Button>,
+        <>
+          {" "}
+          {lastUpdate && (
+            <small
+              style={{
+                color: "rgba(0,0,0,0.7)",
+                paddingRight: 7,
+                float: "left",
+                paddingTop: 5,
+              }}
+            >
+              Last Update:&nbsp;
+              {lastUpdate?.toLocaleString("en-US", {
+                day: "numeric",
+                hour: "numeric",
+                minute: "numeric",
+                month: "short",
+              }) || "Invalid Date"}
+            </small>
+          )}
+        </>,
       ]}
     >
       <Input
