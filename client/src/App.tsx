@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Outlet, Route, Routes, useNavigate } from "react-router-dom";
-import Login from "./pages/Login";
-import Singup from "./pages/Singup";
+import Singup from "./components/Signup/Singup";
+import Login from "./components/Login/Login";
 import { AuthContext, AuthData } from "./context/AuthContext";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
@@ -11,6 +11,7 @@ import LeftBar from "./components/LeftBar/LeftBar";
 import Background from "./assets/cork-board.jpg";
 import Settings from "./pages/Settings";
 import { Col, Row } from "antd";
+import AuthPage from "./pages/AuthPage/AuthPage";
 
 const queryClient = new QueryClient();
 
@@ -18,7 +19,7 @@ export const LayoutPage = () => {
   const { collapsed }: AuthData = useContext(AuthContext);
   return (
     <Row style={{ width: "100%" }}>
-      <Col span={collapsed ? 1 : 3} style={{ height: "100vh" }}>
+      <Col span={collapsed ? 1 : 3} style={{ height: "100svh" }}>
         <LeftBar />
       </Col>
       <Col
@@ -61,9 +62,11 @@ function App() {
             <Route path="about" element={<Settings />}></Route>
           </Route>
         </Route>
-        <Route path="/signup" element={<Singup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<AuthPage />}>
+          <Route path="/signup" element={<Singup />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
+        </Route>
       </Routes>
       <ReactQueryDevtools initialIsOpen position="bottom-right" />
     </QueryClientProvider>

@@ -69,7 +69,7 @@ const items: MenuItem[] = [
       <SettingOutlined />
     </Link>
   ),
-  getItem("Logout", "5", <SettingOutlined />),
+  getItem("Logout", "5", <LogoutOutlined />),
 ];
 
 const LeftBar = () => {
@@ -120,14 +120,14 @@ const LeftBar = () => {
 
   return (
     <>
-      <div className="left-bar" style={{ height: "100vh", width: "100vh" }}>
+      <div className="left-bar" style={{ height: "100svh", width: "100vh" }}>
         {!isMobile && (
           <Button
             style={{ position: "absolute", left: 0 }}
             type="primary"
             onClick={toggleCollapsed}
           >
-            {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}{" "}
+            {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
           </Button>
         )}
 
@@ -135,7 +135,7 @@ const LeftBar = () => {
           defaultSelectedKeys={routes[location.pathname]}
           defaultOpenKeys={["sub1"]}
           mode="inline"
-          style={{ paddingTop: 81, backgroundColor: "#344152" }}
+          style={{ paddingTop: 81, backgroundColor: "#344152", color: "white" }}
           inlineCollapsed={collapsed}
           items={items}
           onClick={onClick}
