@@ -14,63 +14,9 @@ import "./leftbar.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext, AuthData } from "../../context/AuthContext";
 import "./leftbar.css";
+import { items, routes } from "./items";
 
 type MenuItem = Required<MenuProps>["items"][number];
-
-const routes = {
-  "/dashboard": "1",
-  "/dashboard/favorite": "2",
-  "/dashboard/trash": "3",
-  "/dashboard/about": "4",
-};
-
-function getItem(
-  label: React.ReactNode,
-  key: React.Key,
-  icon?: React.ReactNode,
-  children?: MenuItem[],
-  type?: "group"
-): MenuItem {
-  return {
-    key,
-    icon,
-    children,
-    label,
-    type,
-  } as MenuItem;
-}
-
-const items: MenuItem[] = [
-  getItem(
-    "All Notes",
-    "1",
-    <Link replace to={"/dashboard"}>
-      <ProfileOutlined />
-    </Link>
-  ),
-  getItem(
-    "Favorites Notes",
-    "2",
-    <Link replace to={"/dashboard/favorite"}>
-      <BookOutlined />
-    </Link>
-  ),
-  getItem(
-    "Trash",
-    "3",
-    <Link replace to={"/dashboard/trash"}>
-      <DeleteOutlined />
-    </Link>
-  ),
-  getItem(
-    "Settings",
-    "4",
-    <Link replace to={"/dashboard/about"}>
-      <SettingOutlined />
-    </Link>
-  ),
-  getItem("Logout", "5", <LogoutOutlined />),
-];
 
 const LeftBar = () => {
   const { setAuth, collapsed, setCollapsed }: AuthData =
@@ -81,7 +27,7 @@ const LeftBar = () => {
   const location = useLocation();
 
   const onClick: MenuProps["onClick"] = (e) => {
-    if (e.key === "5") logout();
+    if (e.key === "6") logout();
   };
 
   const logout = () => {

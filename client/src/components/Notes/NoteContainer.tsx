@@ -10,6 +10,7 @@ import {
 } from "@ant-design/icons";
 import "./note.css";
 import {
+  editNote,
   removeNoteById,
   setDeletedNote,
   setFavoriteNote,
@@ -22,9 +23,11 @@ import TextEditor from "../TextEditor/TextEditor";
 
 export interface NoteProps {
   note: Note;
+  className?: string;
+  styles?;
 }
 
-const NoteContainer = ({ note }: NoteProps) => {
+const NoteContainer = ({ note, className, styles }: NoteProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isTrashRoute = useMatch("dashboard/trash");
 
@@ -52,12 +55,20 @@ const NoteContainer = ({ note }: NoteProps) => {
     },
   });
 
+  const mutation = useMutation({
+    mutationFn: editNote,
+    onSuccess: () => {
+      console.log("firstttttttttt");
+      queryClient.invalidateQueries("notes");
+    },
+  });
+
   const { id: noteId } = note;
 
   return (
     <>
       <div
-        className="note"
+        className={className || "note"}
         style={{
           backgroundColor: note.color,
         }}
@@ -79,11 +90,15 @@ const NoteContainer = ({ note }: NoteProps) => {
                 hideToolbar
                 content={note.text}
                 defaultValue={note.text}
-                setDefaultStyle={`background-color: ${note.color}; font-size: 50 px;border: none;     text-overflow: ellipsis;
+                setDefaultStyle={`background-color: ${
+                  note.color
+                }; font-size: 50 px;border: none;text-overflow: ellipsis;
                               overflow: hidden;
-                              display: -webkit-box;
-                              -webkit-line-clamp: 9;max-height: 180px; 
-                              -webkit-box-orient: vertical; padding: 0px`}
+                              display: ${styles?.display || "-webkit-box"};
+                              -webkit-line-clamp: 9;max-height: ${
+                                styles?.maxHeight || "180px"
+                              }; 
+                              -webkit-box-orient: vertical; padding: 0px; height: auto`}
               ></TextEditor>
             </div>
             <div className="note-footer">
@@ -112,7 +127,12 @@ const NoteContainer = ({ note }: NoteProps) => {
                   note={note}
                 ></EditNoteModal>
                 <span
-                  onClick={() => favoriteNoteMutation.mutate(note)}
+                  onClick={() =>
+                    mutation.mutate({
+                      ...note,
+                      isFavorite: !note.isFavorite,
+                    })
+                  }
                   style={{ paddingLeft: 10, cursor: "pointer" }}
                 >
                   <Tooltip
@@ -146,7 +166,10 @@ const NoteContainer = ({ note }: NoteProps) => {
                     onClick={() => {
                       isTrashRoute
                         ? deleteNoteForeverMutation.mutate(noteId)
-                        : deleteNoteMutation.mutate(note);
+                        : mutation.mutate({
+                            ...note,
+                            isDeleted: !note.isDeleted,
+                          });
                     }}
                   />
                 </Tooltip>

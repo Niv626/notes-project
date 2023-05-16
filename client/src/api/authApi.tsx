@@ -43,6 +43,7 @@ app.interceptors.request.use(
     } else {
       console.log("not valid token");
       localStorage.removeItem("access_token");
+      window.location.replace("/");
     }
     return config;
   },
@@ -59,6 +60,7 @@ axios.interceptors.response.use(
     const { status } = error.response;
     if (status === UNAUTHORIZED) {
       localStorage.removeItem("access_token");
+      window.location.replace("/");
     }
     return Promise.reject(error);
   }

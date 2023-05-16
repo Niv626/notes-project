@@ -12,6 +12,7 @@ import Background from "./assets/cork-board.jpg";
 import Settings from "./pages/Settings";
 import { Col, Row } from "antd";
 import AuthPage from "./pages/AuthPage/AuthPage";
+import Whiteboard from "./components/Whiteboard/Whiteboard";
 
 const queryClient = new QueryClient();
 
@@ -59,7 +60,8 @@ function App() {
             <Route index element={<ContentPage />}></Route>
             <Route path="favorite" element={<ContentPage />}></Route>
             <Route path="trash" element={<ContentPage />}></Route>
-            <Route path="about" element={<Settings />}></Route>
+            <Route path="settings" element={<Settings />}></Route>
+            <Route path="whiteboard" element={<Whiteboard />}></Route>
           </Route>
         </Route>
         <Route path="/" element={<AuthPage />}>

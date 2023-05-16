@@ -83,7 +83,9 @@ const ContentPage = () => {
         ></Notes>
       </Row>
       {!isFavoriteRoute && !isTrashRoute && (
-        <AddNote notesLength={notes?.length}></AddNote>
+        <AddNote
+          notesLength={notes?.filter(({ isDeleted }) => !isDeleted)?.length}
+        ></AddNote>
       )}
     </>
   );

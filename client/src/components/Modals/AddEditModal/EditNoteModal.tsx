@@ -57,7 +57,6 @@ const EditNoteModal = ({
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  console.log("note.updatedAt", note.updatedAt);
 
   return (
     <>

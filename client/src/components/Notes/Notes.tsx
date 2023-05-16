@@ -5,7 +5,7 @@ import { PlusCircleOutlined } from "@ant-design/icons";
 import AddNoteModal from "../Modals/AddEditModal/AddNoteModal";
 import { useMatch, useParams } from "react-router-dom";
 
-const colorsArray = [
+export const colorsArray = [
   "#C0C8F3",
   "#E7F3CD",
   "#D4FFE3",
@@ -23,6 +23,10 @@ export interface Note {
   id: number;
   color?: string;
   updatedAt: Date;
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
 }
 
 export interface NotesProps {

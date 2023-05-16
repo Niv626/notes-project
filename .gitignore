@@ -11,6 +11,9 @@ client/node_modules/
 server/.env
 server/.env.test
 
+server/dist/
+
+notes.txt
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/

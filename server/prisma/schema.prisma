@@ -40,6 +40,12 @@ model Note {
   isFavorite Boolean @default(false)
   isDeleted Boolean @default(false)
 
+  x Int? 
+  y Int? 
+
+  width Int? 
+  height Int? 
+
 
   @@map("notes")
 }

@@ -21,6 +21,10 @@ CREATE TABLE "notes" (
     "userId" INTEGER NOT NULL,
     "isFavorite" BOOLEAN NOT NULL DEFAULT false,
     "isDeleted" BOOLEAN NOT NULL DEFAULT false,
+    "x" INTEGER,
+    "y" INTEGER,
+    "width" INTEGER,
+    "height" INTEGER,
 
     CONSTRAINT "notes_pkey" PRIMARY KEY ("id")
 );
