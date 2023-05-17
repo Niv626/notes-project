@@ -4,10 +4,11 @@ import { notification } from "antd";
 //TODO: SEND PROPS
 export const openNotification = (
   placement: NotificationPlacement,
-  desc: string
+  desc: string,
+  message?: string
 ) => {
   notification.open({
-    message: "Registration Failed",
+    message: message || "Registration Failed",
     duration: 5,
     description: desc,
     onClick: () => {

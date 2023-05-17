@@ -2,7 +2,7 @@ import { Note } from "../components/Notes/Notes";
 import app from "./authApi";
 
 export const getNotes = async () => {
-  const res = await app.get("/notes");
+  const res = await app.get(`/notes`);
   return res.data;
 };
 

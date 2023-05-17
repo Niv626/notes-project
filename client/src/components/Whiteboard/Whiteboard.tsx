@@ -1,11 +1,5 @@
-import { useCallback, useContext, useEffect, useState } from "react";
-import ReactFlow, {
-  ReactFlowProvider,
-  useReactFlow,
-  Node,
-  Controls,
-} from "reactflow";
-
+import { useEffect } from "react";
+import ReactFlow, { useReactFlow, Node, Controls } from "reactflow";
 import "reactflow/dist/style.css";
 import "./whiteboard.css";
 import React from "react";
@@ -15,37 +9,27 @@ import { useQuery } from "react-query";
 import { editNote, getNotes } from "../../api/noteApi";
 import AddNote from "../AddNote";
 import ResizableNoteSelected from "./ResizableNoteSelected";
-import WhiteboardProvider, {
-  WhiteboardContext,
-} from "../../context/WhiteboardContext";
+import { useNoteMutation } from "../../hooks/useNoteMutation";
 
 const nodeTypes = {
   ResizableNoteSelected,
 };
 
-function Flow() {
+const Whiteboard = () => {
   const reactFlowInstance = useReactFlow();
+  const EditNotemutation = useNoteMutation();
 
-  // const [isFetching, setIsFetching] = useState<boolean>(true);
-  // const queryClient = useQueryClient();
-
-  const EditNotemutation: any = useContext(WhiteboardContext);
-
-  // const EditNotemutation = useMutation({
-  //   mutationFn: editNote,
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries("notes");
-  //   },
-  // });
-
-  const { data: notes } = useQuery({
+  const { data: notes, refetch } = useQuery({
     queryKey: ["notes"],
     queryFn: getNotes,
-    enabled: !EditNotemutation.isLoading && !EditNotemutation.isError,
   });
 
+  useEffect(() => {
+    refetch();
+  }, []);
+
   const onNodeDragStop = (_: any, node: Node) => {
-    const noteData = notes[parseInt(node.id) - 1];
+    const noteData = notes.find((note) => note.id === parseInt(node.id));
 
     const { x, y } = node.position;
     if (noteData?.x !== x || noteData?.y !== y) {
@@ -54,8 +38,8 @@ function Flow() {
         ...noteData,
         x,
         y,
-        width: noteData.width,
-        height: noteData.height,
+        width: noteData?.width,
+        height: noteData?.height,
       });
     }
   };
@@ -103,23 +87,15 @@ function Flow() {
         snapToGrid={true}
         defaultNodes={[]}
         nodeTypes={nodeTypes}
+        fitView
+        minZoom={0.5}
+        maxZoom={2.5}
       />
       <AddNote
         notesLength={notes?.filter(({ isDeleted }) => !isDeleted)?.length}
       ></AddNote>
-      <Controls />
+      <Controls style={{ paddingLeft: "2.8em", boxShadow: "none" }} />
     </>
   );
-}
-
-function Whiteboard(props) {
-  return (
-    <ReactFlowProvider>
-      <WhiteboardProvider>
-        <Flow {...props} />
-      </WhiteboardProvider>
-    </ReactFlowProvider>
-  );
-}
-
+};
 export default Whiteboard;

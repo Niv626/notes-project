@@ -15,6 +15,7 @@ const Login = () => {
   localStorage.removeItem("access_token");
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const [btndisabled, setbtndisabled] = useState(true);
 
   const mutation = useMutation({
     mutationFn: login,
@@ -46,7 +47,16 @@ const Login = () => {
   });
 
   const onFinish = (values: { email: string; password: string }) => {
-    mutation.mutate({ ...values, firstName: " ", lastName: " " });
+    const { email } = values;
+    mutation.mutate({
+      ...values,
+      email: email.toLowerCase(),
+    });
+  };
+
+  const onValuesChange = (changedValues, values) => {
+    if (!values.email && !values.password) setbtndisabled(true);
+    else setbtndisabled(false);
   };
 
   return (
@@ -55,6 +65,7 @@ const Login = () => {
       initialValues={{ remember: false }}
       onFinish={onFinish}
       autoComplete="off"
+      onValuesChange={onValuesChange}
       style={{ margin: "6%", color: "white" }}
     >
       <div className="login-title " style={{}}>
@@ -73,6 +84,7 @@ const Login = () => {
 
       <b>Email</b>
       <Form.Item
+        id="email"
         name="email"
         rules={[
           {
@@ -86,6 +98,7 @@ const Login = () => {
       </Form.Item>
       <b>Password</b>
       <Form.Item
+        id="password"
         name="password"
         rules={[{ required: true, message: "Please input your password!" }]}
       >
@@ -98,10 +111,15 @@ const Login = () => {
           Sign Up
         </Link>
       </div>
-      <Form.Item style={{ display: "flex", justifyContent: "center" }}>
+      <Form.Item
+        id="sign-in-btn"
+        name="sign-in-btn"
+        style={{ display: "flex", justifyContent: "center" }}
+      >
         <Button
           type="primary"
           loading={isLoading}
+          disabled={btndisabled}
           htmlType="submit"
           style={{ height: 40, backgroundColor: "#7a598e" }}
         >

@@ -4,6 +4,7 @@ import {
   LogoutOutlined,
   ProfileOutlined,
   SettingOutlined,
+  SnippetsOutlined,
 } from "@ant-design/icons";
 
 import { MenuProps } from "antd";
@@ -16,10 +17,10 @@ type MenuItem = Required<MenuProps>["items"][number];
 
 export const routes = {
   "/dashboard": "1",
-  "/dashboard/favorite": "2",
-  "/dashboard/trash": "3",
-  "/dashboard/settings": "4",
-  "/dashboard/whiteboard": "5",
+  "/dashboard/whiteboard": "2",
+  "/dashboard/favorite": "3",
+  "/dashboard/trash": "4",
+  "/dashboard/account-settings": "5",
 };
 
 function getItem(
@@ -47,32 +48,33 @@ export const items: MenuItem[] = [
     </Link>
   ),
   getItem(
-    "Favorites Notes",
+    "Whiteboard",
     "2",
+    <Link replace to={"/dashboard/whiteboard"}>
+      <SnippetsOutlined />
+    </Link>
+  ),
+  getItem(
+    "Favorites Notes",
+    "3",
     <Link replace to={"/dashboard/favorite"}>
       <BookOutlined />
     </Link>
   ),
   getItem(
     "Trash",
-    "3",
+    "4",
     <Link replace to={"/dashboard/trash"}>
       <DeleteOutlined />
     </Link>
   ),
   getItem(
     "Settings",
-    "4",
-    <Link replace to={"/dashboard/settings"}>
-      <SettingOutlined />
-    </Link>
-  ),
-  getItem(
-    "Whiteboard",
     "5",
-    <Link replace to={"/dashboard/whiteboard"}>
+    <Link replace to={"/dashboard/account-settings"}>
       <SettingOutlined />
     </Link>
   ),
+
   getItem("Logout", "6", <LogoutOutlined />),
 ];

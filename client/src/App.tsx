@@ -13,6 +13,7 @@ import Settings from "./pages/Settings";
 import { Col, Row } from "antd";
 import AuthPage from "./pages/AuthPage/AuthPage";
 import Whiteboard from "./components/Whiteboard/Whiteboard";
+import { ReactFlowProvider } from "reactflow";
 
 const queryClient = new QueryClient();
 
@@ -54,22 +55,24 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Routes>
-        <Route element={<ProtectedRoutes />}>
-          <Route path="/dashboard" element={<LayoutPage />}>
-            <Route index element={<ContentPage />}></Route>
-            <Route path="favorite" element={<ContentPage />}></Route>
-            <Route path="trash" element={<ContentPage />}></Route>
-            <Route path="settings" element={<Settings />}></Route>
-            <Route path="whiteboard" element={<Whiteboard />}></Route>
+      <ReactFlowProvider>
+        <Routes>
+          <Route element={<ProtectedRoutes />}>
+            <Route path="/dashboard" element={<LayoutPage />}>
+              <Route index element={<ContentPage />}></Route>
+              <Route path="favorite" element={<ContentPage />}></Route>
+              <Route path="trash" element={<ContentPage />}></Route>
+              <Route path="account-settings" element={<Settings />}></Route>
+              <Route path="whiteboard" element={<Whiteboard />}></Route>
+            </Route>
           </Route>
-        </Route>
-        <Route path="/" element={<AuthPage />}>
-          <Route path="/signup" element={<Singup />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Login />} />
-        </Route>
-      </Routes>
+          <Route path="/" element={<AuthPage />}>
+            <Route path="/signup" element={<Singup />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Login />} />
+          </Route>
+        </Routes>
+      </ReactFlowProvider>
       <ReactQueryDevtools initialIsOpen position="bottom-right" />
     </QueryClientProvider>
   );

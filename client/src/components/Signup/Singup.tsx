@@ -1,21 +1,11 @@
-import React, { SetStateAction, Dispatch, useContext, useState } from "react";
-import { Card, Form, Input, Button } from "antd";
+import React, { useContext, useState } from "react";
+import { Form, Input, Button } from "antd";
 import "./singup.css";
 import { Link, useNavigate } from "react-router-dom";
-import api, { signup } from "../../api/authApi";
+import { signup } from "../../api/authApi";
 import { AuthContext } from "../../context/AuthContext";
 import { openNotification } from "../../utils/openNotification";
 import { useMutation } from "react-query";
-
-// switch to react query
-
-interface SingupProps {
-  setAuth: Dispatch<SetStateAction<boolean>>;
-  email: string;
-  password: string;
-  name?: string;
-  lastName?: string;
-}
 
 const Singup = () => {
   const { setAuth }: any = useContext(AuthContext);
@@ -27,6 +17,7 @@ const Singup = () => {
     onSuccess: (response) => {
       setAuth({ accessToken: response.data["access_token"] });
       navigate("../login", { replace: true });
+      openNotification("topLeft", "Successfully register!", "");
     },
     onMutate: () => setIsLoading(true),
     onSettled: () => setIsLoading(false),
@@ -39,8 +30,8 @@ const Singup = () => {
   });
 
   const onFinish = (values) => {
-    const { passwordConfirm, ...rest } = values;
-    mutation.mutate(rest);
+    const { passwordConfirm, email, ...rest } = values;
+    mutation.mutate({ ...rest, email: email.toLowerCase() });
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -48,9 +39,8 @@ const Singup = () => {
   };
 
   return (
-    // <div className="site-card-border-less-wrapper">
-    // <Card className="signup-login-card">
     <Form
+      id="signup"
       name="basic"
       initialValues={{ remember: false }}
       onFinish={onFinish}
@@ -73,6 +63,7 @@ const Singup = () => {
       </div>
       <b>Email</b>
       <Form.Item
+        id="signup-email"
         name="email"
         rules={[
           {
@@ -87,6 +78,7 @@ const Singup = () => {
 
       <b>First Name</b>
       <Form.Item
+        id="signup-first-name"
         name="firstName"
         rules={[{ required: true, message: "Please input your name!" }]}
       >
@@ -95,6 +87,7 @@ const Singup = () => {
 
       <b>Last Name</b>
       <Form.Item
+        id="signup-last-name"
         name="lastName"
         rules={[{ required: true, message: "Please input your last name!" }]}
       >
@@ -103,6 +96,7 @@ const Singup = () => {
 
       <b>Password</b>
       <Form.Item
+        id="signup-password"
         name="password"
         rules={[{ required: true, message: "Please input your password!" }]}
       >
@@ -110,6 +104,7 @@ const Singup = () => {
       </Form.Item>
       <b>Password Confirmation</b>
       <Form.Item
+        id="passwordConfirm"
         name="passwordConfirm"
         style={{ width: "100%", marginBottom: 5 }}
         dependencies={["password"]}
@@ -140,7 +135,10 @@ const Singup = () => {
             Log In
           </Link>
         </div>
-        <Form.Item style={{ display: "flex", justifyContent: "center" }}>
+        <Form.Item
+          name="signup-btn"
+          style={{ display: "flex", justifyContent: "center" }}
+        >
           <Button
             type="primary"
             htmlType="submit"

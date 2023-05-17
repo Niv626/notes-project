@@ -60,6 +60,7 @@ const AddEditModal = ({
       ]}
     >
       <Input
+        name={`unput-note-${title}`}
         showCount
         autoFocus
         maxLength={20}

@@ -1,8 +1,7 @@
-import React, { useRef } from "react";
+import React from "react";
 import { Button, Card, Form, Input } from "antd";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { editUser, getUser } from "../api/userApi";
-import { InputRef } from "antd/lib/input/Input";
 
 const Settings: React.FC = () => {
   const { data: user } = useQuery("user", getUser);
@@ -16,35 +15,42 @@ const Settings: React.FC = () => {
   });
 
   return (
-    <Card title="Settings" style={{ height: "90%", margin: 50 }}>
+    <Card title="Settings" style={{ height: "100%", margin: 0 }}>
       <Card type="inner" title="Edit User Details">
-        <Form form={form} onFinish={(values) => mutation.mutate(values)}>
+        <Form
+          name="settings-form"
+          initialValues={{
+            ["firstName"]: user?.firstName,
+            ["lastName"]: user?.lastName,
+          }}
+          form={form}
+          onFinish={(values) => mutation.mutate(values)}
+        >
           <b>First Name</b>
-          <Form.Item name="firstName">
-            <Input defaultValue={user?.firstName} />
+          <Form.Item id="settings-first-name" name="firstName">
+            <Input />
           </Form.Item>
 
           <b>Last Name</b>
-          <Form.Item name="lastName">
-            <Input defaultValue={user?.lastName} />
+          <Form.Item id="settings-last-name" name="lastName">
+            <Input />
           </Form.Item>
 
           <b>Change Password</b>
-          <Form.Item name="password">
+          <Form.Item id="settings-password" name="password">
             <Input.Password placeholder="*********" />
           </Form.Item>
 
-          <Form.Item style={{ marginBottom: 0 }}>
+          <Form.Item
+            id="settings-edit-btn"
+            name="settings-edit-btn"
+            style={{ marginBottom: 0 }}
+          >
             <Button type="primary" htmlType="submit" size="middle">
               Edit
             </Button>
           </Form.Item>
         </Form>
-      </Card>
-      <Card style={{ marginTop: 16 }} type="inner" title="Export Notes">
-        <Button size="middle" type="primary">
-          Export
-        </Button>
       </Card>
     </Card>
   );

@@ -8,21 +8,22 @@ import {
   Response,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { AuthDto } from './dto';
 import { JwtService } from '@nestjs/jwt';
+import { SignInDto } from './dto/signin.dto';
+import { SignUpDto } from './dto';
 
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService, private jwt: JwtService) {}
 
   @Post('signup')
-  signup(@Body() dto: AuthDto) {
+  signup(@Body() dto: SignUpDto) {
     return this.authService.signup(dto);
   }
 
   @HttpCode(HttpStatus.OK)
   @Post('signin')
-  async signin(@Body() dto: AuthDto) {
+  async signin(@Body() dto: SignInDto) {
     // const user = await this.appService.findOne({email: dto.email});
     // const sessionId = uuid();
     // const jwt = await this.jwt.signAsync({ id: 'sd' });

@@ -10,6 +10,14 @@ export class CreateNoteDto {
   text?: string;
 
   isFavorite: boolean = false;
-
   isDeleted: boolean = false;
+
+  x?: number;
+  y?: number;
+
+  @IsOptional()
+  width?: number;
+
+  @IsOptional()
+  height?: number;
 }

@@ -8,9 +8,6 @@ import {
   Delete,
   Param,
   ParseIntPipe,
-  HttpCode,
-  HttpStatus,
-  Put,
 } from '@nestjs/common';
 import { GetUser } from 'src/auth/decorator';
 

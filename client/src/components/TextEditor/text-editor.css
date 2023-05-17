@@ -6,3 +6,14 @@
 .sun-editor .se-resizing-bar {
   display: none;
 }
+
+.display-note-container {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 9;
+  max-height: 180px;
+  -webkit-box-orient: vertical;
+  padding: 0px;
+  height: auto;
+}
