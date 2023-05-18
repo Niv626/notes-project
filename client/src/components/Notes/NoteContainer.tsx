@@ -5,16 +5,10 @@ import {
   DeleteOutlined,
   StarOutlined,
   StarFilled,
-  PushpinOutlined,
   RestOutlined,
 } from "@ant-design/icons";
 import "./note.css";
-import {
-  editNote,
-  removeNoteById,
-  setDeletedNote,
-  setFavoriteNote,
-} from "../../api/noteApi";
+import { editNote, removeNoteById, setDeletedNote } from "../../api/noteApi";
 import { useMutation, useQueryClient } from "react-query";
 import EditNoteModal from "../Modals/AddEditModal/EditNoteModal";
 import { Tooltip } from "antd";
