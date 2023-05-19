@@ -88,8 +88,8 @@ const Whiteboard = () => {
         defaultNodes={[]}
         nodeTypes={nodeTypes}
         fitView
-        minZoom={0.5}
-        maxZoom={2.5}
+        // minZoom={0.5}
+        // maxZoom={100}
       />
       <AddNote
         notesLength={notes?.filter(({ isDeleted }) => !isDeleted)?.length}

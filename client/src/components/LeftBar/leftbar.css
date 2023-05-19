@@ -14,3 +14,47 @@
   position: absolute !important;
   bottom: 0;
 }
+.leftbar-search-input {
+  background-color: #1f1f1f;
+  border: none;
+  color: white;
+}
+
+.leftbar-search-input input {
+  background-color: #1f1f1f;
+  color: white;
+}
+
+.leftbar-search-popover {
+  /* background-color: #1f1f1f ; */
+}
+
+.ant-menu-title-content {
+  /* margin-left: 3px !important; */
+  display: flex;
+}
+
+.leftbar-search-input::placeholder {
+  color: white;
+  opacity: 0.3;
+}
+
+.ant-menu-inline-collapsed-tooltip:has(input[placeholder="Search"]) {
+  display: none;
+}
+.ant-menu-item > .ant-menu-item-selected {
+  background-color: #0fd748 !important;
+}
+
+.ant-menu-item:hover {
+  /* color: transparent; */
+  /* padding-left: 6px !important; */
+}
+.ant-menu-item:active {
+  /* color: rgb(0, 255, 13) !important; */
+  /* padding-left: 6px !important; */
+}
+.ant-menu-item .ant-menu-item-selected .ant-menu-item-active {
+  background-color: #0d1117 !important;
+  color: rgb(0, 0, 0) !important;
+}

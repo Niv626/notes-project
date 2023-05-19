@@ -3,7 +3,6 @@ import { editNote } from "../api/noteApi";
 
 export const useNoteMutation = () => {
   const queryClient = useQueryClient();
-  console.log("firstsdasdas");
 
   const EditNotemutation = useMutation({
     mutationFn: editNote,

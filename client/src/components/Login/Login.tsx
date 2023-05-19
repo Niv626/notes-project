@@ -121,7 +121,7 @@ const Login = () => {
           loading={isLoading}
           disabled={btndisabled}
           htmlType="submit"
-          style={{ height: 40, backgroundColor: "#7a598e" }}
+          style={{ height: 40, backgroundColor: "#7a598e", border: "none" }}
         >
           Sign In
         </Button>

@@ -19,10 +19,14 @@ const queryClient = new QueryClient();
 
 export const LayoutPage = () => {
   const { collapsed }: AuthData = useContext(AuthContext);
+  const [search, setSearch] = useState("");
+  const onSearch = (e: React.FormEvent<HTMLInputElement>) =>
+    setSearch(e.currentTarget.value);
+
   return (
     <Row style={{ width: "100%" }}>
       <Col span={collapsed ? 1 : 3} style={{ height: "100svh" }}>
-        <LeftBar />
+        <LeftBar onSearch={onSearch} />
       </Col>
       <Col
         span={collapsed ? 23 : 21}
@@ -33,7 +37,7 @@ export const LayoutPage = () => {
           position: "relative",
         }}
       >
-        <Outlet />
+        <Outlet context={[search, onSearch]} />
       </Col>
     </Row>
   );

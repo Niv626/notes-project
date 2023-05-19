@@ -17,3 +17,11 @@
   padding: 0px;
   height: auto;
 }
+
+.display-note-container .se-component figure {
+  margin: 0;
+}
+
+.display-note-container .se-component figure audio {
+  width: 250px;
+}

@@ -1,13 +1,13 @@
 import axios from "axios";
-import jwtDecode, { JwtDecodeOptions, JwtPayload } from "jwt-decode";
+import jwtDecode, { JwtPayload } from "jwt-decode";
 import useAuth from "../hooks/useAuth";
 
 const UNAUTHORIZED = 401;
 
-export const login = async ({ email, password, firstName, lastName }) => {
+export const login = async ({ email, password }) => {
   const res = await app.post(
     `/auth/signin`,
-    JSON.stringify({ email, password, firstName, lastName })
+    JSON.stringify({ email, password })
   );
   return res;
 };
