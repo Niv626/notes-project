@@ -1,6 +1,7 @@
 ## Table of contents
-* [Deployment](#deployment)
-* [Technologies](#technologies)
+* [Project Overview](#project-overview)
+* [Authentication](#authentication)
+* [Client-Side Technology Stack](#client-sid-technology-stack)
 * [Setup](#authentication)
 
 
