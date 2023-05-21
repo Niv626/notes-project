@@ -19,7 +19,7 @@ https://note-me.onrender.com/
 ## Project Overview:
 Note Me is a web-based note-taking application written using React.js and Nest.js, with a PostgreSQL database as the backend. It provides users with a convenient platform for creating, editing, and managing their notes. The application offers a range of features, including note creation, editing, deletion, and organization. Users can mark certain notes as favorites and easily access them on a dedicated favorites page. Additionally, deleted notes are stored separately with an option to restore them if needed.
 
-In addition to the note-taking functionality, Note Me includes a whiteboard page. The whiteboard page allows users to unleash their creativity by providing a canvas where they can draw, write, and annotate freely. This feature adds a dynamic and interactive element to the application, providing users with a versatile tool for visual expression and brainstorming.
+In addition to the note-taking functionality, Note Me includes a whiteboard page. The whiteboard page adds a dynamic and interactive element to the application, providing users with a versatile tool for visual expression and brainstorming.
 
 ## Authentication:
 To ensure a secure and personalized experience, Note Me incorporates user identification and authentication. User information is stored in a PostgreSQL database, and the application verifies the user's credentials during the login process. Upon successful login, users receive a token that grants them access to the site's functionalities.
