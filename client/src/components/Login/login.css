@@ -1,5 +1,6 @@
 .login-title {
-  font-size: 3vw;
+  font-size: 52px;
+  line-height: normal;
   background-image: radial-gradient(circle, #553c9a, #ee4b2b);
   color: transparent;
   background-clip: "text";

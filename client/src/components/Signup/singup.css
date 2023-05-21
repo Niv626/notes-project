@@ -6,6 +6,13 @@
   align-items: center;
 }
 
+@media only screen and (max-width: 600px) {
+  .signup-login-card {
+    width: 100vw !important;
+    height: 100vh !important;
+  }
+}
+
 .signup-login-card {
   width: 65vw;
   height: 85vh;

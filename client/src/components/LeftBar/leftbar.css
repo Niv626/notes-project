@@ -39,12 +39,16 @@
   opacity: 0.3;
 }
 
+.ant-menu-item:first-child {
+  color: white !important;
+}
+
 .ant-menu-inline-collapsed-tooltip:has(input[placeholder="Search"]) {
   display: none;
 }
-.ant-menu-item > .ant-menu-item-selected {
+/* .ant-menu-item > .ant-menu-item-selected {
   background-color: #0fd748 !important;
-}
+} */
 
 .ant-menu-item:hover {
   /* color: transparent; */

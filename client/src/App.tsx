@@ -14,6 +14,7 @@ import { Col, Row } from "antd";
 import AuthPage from "./pages/AuthPage/AuthPage";
 import Whiteboard from "./components/Whiteboard/Whiteboard";
 import { ReactFlowProvider } from "reactflow";
+import LeftBars from "./components/LeftBar/LeftBars";
 
 const queryClient = new QueryClient();
 
@@ -26,7 +27,7 @@ export const LayoutPage = () => {
   return (
     <Row style={{ width: "100%" }}>
       <Col span={collapsed ? 1 : 3} style={{ height: "100svh" }}>
-        <LeftBar onSearch={onSearch} />
+        <LeftBars onSearch={onSearch} setSearch={setSearch} />
       </Col>
       <Col
         span={collapsed ? 23 : 21}
