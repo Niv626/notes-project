@@ -1,5 +1,7 @@
 # Note Me 
   Web-Based Note Taking Application
+![image](https://iili.io/HgN5NNp.jpg)
+
 
 
 ## Table of contents
@@ -27,4 +29,5 @@ The server-side of Note Me is implemented using Nest.js, a progressive TypeScrip
 ## Deployment:
 The Note Me website is deployed and hosted on a server accessible via the URL: https://note-me.onrender.com/. The deployment ensures that users can access the application reliably and securely from anywhere with an internet connection.
 
-The Note Me project showcases proficiency in modern web development technologies, including React.js, TypeScript, Nest.js, and PostgreSQL. It provides a solid foundation for users to manage their notes effectively, and the addition of the whiteboard page enhances the versatility and creativity of the application. Overall, Note Me demonstrates the ability to build secure, intuitive, and feature-rich web applications.
+## Visuals and Demo:
+
