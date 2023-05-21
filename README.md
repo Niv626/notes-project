@@ -2,6 +2,7 @@
 * [Project Overview](#project-overview)
 * [Authentication](#authentication)
 * [Client-Side Technology Stack](#client-side-technology-stack)
+* [Server-Side Technology Stack](#server-side-technology-stack)
 * [Setup](#authentication)
 
 
@@ -16,7 +17,7 @@ To ensure a secure and personalized experience, Note Me incorporates user identi
 ## Client Side Technology Stack:
 The client-side of Note Me is built using React.js with TypeScript, offering a robust and scalable front-end framework. The project utilizes various libraries, including React Query for efficient data management and caching, React Flow for building interactive flowcharts, Ant Design (Antd) for UI components, and React Router DOM for handling routing within the application.
 
-## Server-Side Technology Stack:
+## Server Side Technology Stack:
 The server-side of Note Me is implemented using Nest.js, a progressive TypeScript framework for building scalable and maintainable server-side applications. Nest.js allows for seamless creation of endpoints and facilitates seamless integration with the PostgreSQL database for efficient data retrieval and storage.
 
 ## Deployment:
