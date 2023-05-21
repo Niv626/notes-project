@@ -1,7 +1,7 @@
 ## Table of contents
 * [Project Overview](#project-overview)
 * [Authentication](#authentication)
-* [Client-Side Technology Stack](#client-sid-technology-stack)
+* [Client-Side Technology Stack](#client-side-technology-stack)
 * [Setup](#authentication)
 
 
@@ -13,7 +13,7 @@ In addition to the note-taking functionality, Note Me includes a whiteboard page
 ## Authentication:
 To ensure a secure and personalized experience, Note Me incorporates user identification and authentication. User information is stored in a PostgreSQL database, and the application verifies the user's credentials during the login process. Upon successful login, users receive a token that grants them access to the site's functionalities.
 
-## Client-Side Technology Stack:
+## Client Side Technology Stack:
 The client-side of Note Me is built using React.js with TypeScript, offering a robust and scalable front-end framework. The project utilizes various libraries, including React Query for efficient data management and caching, React Flow for building interactive flowcharts, Ant Design (Antd) for UI components, and React Router DOM for handling routing within the application.
 
 ## Server-Side Technology Stack:
