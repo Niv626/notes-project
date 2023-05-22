@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import ReactFlow, { useReactFlow, Node, Controls } from "reactflow";
 import "reactflow/dist/style.css";
 import "./whiteboard.css";
@@ -10,6 +10,7 @@ import { editNote, getNotes } from "../../api/noteApi";
 import AddNote from "../AddNote";
 import ResizableNoteSelected from "./ResizableNoteSelected";
 import { useNoteMutation } from "../../hooks/useNoteMutation";
+import { AuthContext, AuthData } from "../../context/AuthContext";
 
 const nodeTypes = {
   ResizableNoteSelected,
@@ -18,6 +19,7 @@ const nodeTypes = {
 const Whiteboard = () => {
   const reactFlowInstance = useReactFlow();
   const EditNotemutation = useNoteMutation();
+  const { collapsed }: AuthData = useContext(AuthContext);
 
   const { data: notes, refetch } = useQuery({
     queryKey: ["notes"],
@@ -29,7 +31,7 @@ const Whiteboard = () => {
   }, []);
 
   const onNodeDragStop = (_: any, node: Node) => {
-    const noteData = notes.find((note) => note.id === parseInt(node.id));
+    const noteData = notes.find((note: Note) => note.id === parseInt(node.id));
 
     const { x, y } = node.position;
     if (noteData?.x !== x || noteData?.y !== y) {
@@ -88,13 +90,17 @@ const Whiteboard = () => {
         defaultNodes={[]}
         nodeTypes={nodeTypes}
         fitView
-        // minZoom={0.5}
-        // maxZoom={100}
       />
       <AddNote
         notesLength={notes?.filter(({ isDeleted }) => !isDeleted)?.length}
       ></AddNote>
-      <Controls style={{ paddingLeft: "2.8em", boxShadow: "none" }} />
+      <Controls
+        style={{
+          position: "fixed",
+          left: collapsed ? 74 : 250,
+          boxShadow: "none",
+        }}
+      />
     </>
   );
 };

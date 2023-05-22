@@ -1,0 +1,17 @@
+@media screen and (max-width: 1347px) {
+  .edit-user-forn-grid {
+    width: 100% !important;
+  }
+}
+
+.avatar-profile {
+  width: 150px;
+  height: 150px;
+  font-size: 110px !important;
+}
+
+@media screen and (max-width: 1347px) {
+  .avatar-grid {
+    display: none;
+  }
+}

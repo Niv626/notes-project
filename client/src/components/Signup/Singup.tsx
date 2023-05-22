@@ -17,7 +17,7 @@ const Singup = () => {
     onSuccess: (response) => {
       setAuth({ accessToken: response.data["access_token"] });
       navigate("../login", { replace: true });
-      openNotification("topLeft", "Successfully register!", "");
+      openNotification("topLeft", "Successfully register!", " ");
     },
     onMutate: () => setIsLoading(true),
     onSettled: () => setIsLoading(false),

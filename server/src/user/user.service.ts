@@ -12,6 +12,7 @@ export class UserService {
       ...(dto.password && { hash: await argon.hash(dto.password) }),
       ...(dto.firstName && { firstName: dto.firstName }),
       ...(dto.lastName && { lastName: dto.lastName }),
+      ...(dto.email && { email: dto.email }),
     };
 
     const user = await this.prisma.user.update({

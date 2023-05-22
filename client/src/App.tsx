@@ -7,27 +7,27 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import ContentPage from "./pages/ContentPage/ContentPage";
-import LeftBar from "./components/LeftBar/LeftBar";
 import Background from "./assets/cork-board.jpg";
-import Settings from "./pages/Settings";
+import Settings from "./pages/Settings/Settings";
 import { Col, Row } from "antd";
 import AuthPage from "./pages/AuthPage/AuthPage";
 import Whiteboard from "./components/Whiteboard/Whiteboard";
 import { ReactFlowProvider } from "reactflow";
-import LeftBars from "./components/LeftBar/LeftBars";
+import LeftBar from "./components/LeftBar/LeftBar";
 
 const queryClient = new QueryClient();
 
 export const LayoutPage = () => {
   const { collapsed }: AuthData = useContext(AuthContext);
   const [search, setSearch] = useState("");
+
   const onSearch = (e: React.FormEvent<HTMLInputElement>) =>
     setSearch(e.currentTarget.value);
 
   return (
     <Row style={{ width: "100%" }}>
       <Col span={collapsed ? 1 : 3} style={{ height: "100svh" }}>
-        <LeftBars onSearch={onSearch} setSearch={setSearch} />
+        <LeftBar onSearch={onSearch} />
       </Col>
       <Col
         span={collapsed ? 23 : 21}
@@ -55,7 +55,7 @@ function App() {
       setAuth && setAuth({ accessToken: "" });
       localStorage.removeItem("access_token");
       navigate("/", { replace: true });
-    }, 1 * 60 * 60 * 1000); // 1hr
+    }, 12 * 60 * 60 * 1000); // 12hr
   }, [auth]);
 
   return (
@@ -78,7 +78,7 @@ function App() {
           </Route>
         </Routes>
       </ReactFlowProvider>
-      <ReactQueryDevtools initialIsOpen position="bottom-right" />
+      {/* <ReactQueryDevtools initialIsOpen position="bottom-right" /> */}
     </QueryClientProvider>
   );
 }

@@ -38,7 +38,7 @@ const TextEditor = (props) => {
           setOptions={{
             buttonList,
           }}
-          setDefaultStyle="height:auto"
+          setDefaultStyle="height:auto; font-family: arial"
         />
       ) : (
         <div

@@ -9,6 +9,8 @@
   align-items: center;
   border: 2px white solid;
   box-shadow: 0 0 10px #00152a;
+  position: absolute;
+  margin-top: 50px;
 }
 
 .user-details:hover {
@@ -25,7 +27,6 @@
 
 .top-bar-collapsed {
   height: 100vh;
-  /* width: 100%; */
   position: fixed;
   overflow-x: hidden;
 }

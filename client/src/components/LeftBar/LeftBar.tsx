@@ -11,18 +11,21 @@ import {
   SnippetsOutlined,
 } from "@ant-design/icons";
 
-import { MenuProps, Button, Menu, Popover, InputRef } from "antd";
+import { MenuProps, Button, Menu, Popover, InputRef, Tooltip } from "antd";
 import "./leftbar.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext, AuthData } from "../../context/AuthContext";
 import "./leftbar.css";
 import { routes } from "./items";
 import SearchNote from "../SearchNote";
+import { getUser } from "../../api/userApi";
+import { useQuery } from "react-query";
 
-const LeftBar = ({ onSearch, setSearch }) => {
+const LeftBar = ({ onSearch }) => {
   const { setAuth, collapsed, setCollapsed }: AuthData =
     useContext(AuthContext);
   const [isMobile, setIsMobile] = useState(false);
+  const { data: user } = useQuery("user", getUser);
 
   const inputRef = useRef<InputRef>(null);
 
@@ -78,12 +81,25 @@ const LeftBar = ({ onSearch, setSearch }) => {
             {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
           </Button>
         )}
+        <Tooltip
+          placement="right"
+          title={
+            <>
+              <div className="text-capitalize">{`${user?.firstName} ${user?.lastName}`}</div>
+              <div className="uppercase-first-letter">{user?.email}</div>
+            </>
+          }
+        >
+          <div className="user-details">
+            <b>{user?.firstName.at(0).toUpperCase()}</b>
+          </div>
+        </Tooltip>
         <Menu
           defaultSelectedKeys={routes[location.pathname]}
           defaultOpenKeys={["sub1"]}
           mode="inline"
           style={{
-            paddingTop: 81,
+            paddingTop: 130,
             backgroundColor: "#344152",
             color: "white",
             paddingLeft: 0,

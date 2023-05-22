@@ -6,11 +6,12 @@ export const getUser = async () => {
   return res.data;
 };
 
-export const editUser = async ({ password, firstName, lastName }) => {
+export const editUser = async ({ password, firstName, lastName, email }) => {
   const res = await app.patch("users/edit-user", {
     password,
     firstName,
     lastName,
+    email,
   });
   return res.data;
 };
