@@ -35,4 +35,7 @@ To ensure a secure and personalized experience, Note Me incorporates user identi
 The Note Me website is deployed and hosted on a server accessible via the URL: https://note-me.onrender.com/. The deployment ensures that users can access the application reliably and securely from anywhere with an internet connection. Please note that the mentioned URL for the deployed website may not be accessible at the time of reading as it is subject to availability and maintenance.
 
 ## Visuals and Demo:
-![image](https://freeimage.host/i/HgvXwv4)
+![image](https://iili.io/HgvXwv4.png)
+![image](https://iili.io/Hgvhd9R.png)
+![image](https://iili.io/HgvhZJf.png)
+![image](https://iili.io/HgvjFJj.png)
