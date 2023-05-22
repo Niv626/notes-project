@@ -14,7 +14,7 @@ https://note-me.onrender.com/
 * [Authentication](#authentication)
 * [Client-Side Technology Stack](#client-side-technology-stack)
 * [Server-Side Technology Stack](#server-side-technology-stack)
-* [Setup](#authentication)
+* [Au](#)
 
 
 ## Project Overview:
@@ -32,7 +32,7 @@ The client-side of Note Me is built using React.js with TypeScript, offering a r
 The server-side of Note Me is implemented using Nest.js, a progressive TypeScript framework for building scalable and maintainable server-side applications. Nest.js allows for seamless creation of endpoints and facilitates seamless integration with the PostgreSQL database for efficient data retrieval and storage.
 
 ## Deployment:
-The Note Me website is deployed and hosted on a server accessible via the URL: https://note-me.onrender.com/. The deployment ensures that users can access the application reliably and securely from anywhere with an internet connection.
+The Note Me website is deployed and hosted on a server accessible via the URL: https://note-me.onrender.com/. The deployment ensures that users can access the application reliably and securely from anywhere with an internet connection. Please note that the mentioned URL for the deployed website may not be accessible at the time of reading as it is subject to availability and maintenance.
 
 ## Visuals and Demo:
 
