@@ -36,6 +36,8 @@ The Note Me website is deployed and hosted on a server accessible via the URL: h
 
 ## Visuals and Demo:
 https://www.youtube.com/watch?v=OduGC-FmhgE
+[![IMAGE ALT TEXT HERE](https://iili.io/HgN5NNp.jpg)](https://www.youtube.com/watch?v=OduGC-FmhgE)
+
 
 ![image](https://iili.io/HgvXwv4.png)
 ![image](https://iili.io/Hgvhd9R.png)
