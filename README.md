@@ -26,7 +26,7 @@ In addition to the note-taking functionality, Note Me includes a whiteboard page
 To ensure a secure and personalized experience, Note Me incorporates user identification and authentication. User information is stored in a PostgreSQL database, and the application verifies the user's credentials during the login process. Upon successful login, users receive a token that grants them access to the site's functionalities.
 
 ## Client Side Technology Stack:
-The client-side of Note Me is built using React.js with TypeScript, offering a robust and scalable front-end framework. The project utilizes various libraries, including React Query for efficient data management and caching, React Flow for building interactive flowcharts, Ant Design (Antd) for UI components, and React Router DOM for handling routing within the application.
+The client-side of Note Me is built using React.js with TypeScript, offering a robust and scalable front-end framework. The project utilizes various libraries, including React Query for efficient data management and caching, React Flow for building interactive whiteboard, Ant Design (Antd) for UI components, and React Router DOM for handling routing within the application.
 
 ## Server Side Technology Stack:
 The server-side of Note Me is implemented using Nest.js, a progressive TypeScript framework for building scalable and maintainable server-side applications. Nest.js allows for seamless creation of endpoints and facilitates seamless integration with the PostgreSQL database for efficient data retrieval and storage.
